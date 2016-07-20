@@ -23,6 +23,8 @@ protocol Authenticator {
     func checkCurrentUser() -> User?
 }
 
+// MARK: - Authenticator Protocol Extension
+
 extension Authenticator {
     func checkCurrentUser() -> User? {
         let auth = FIRAuth.auth()
@@ -30,6 +32,8 @@ extension Authenticator {
         return User(key: key, username: username, email: email)
     }
 }
+
+// MARK: - AuthenticationCoordinator
 
 final class AuthenticationCoordinator: SubCoordinator, Authenticator, AuthenticationViewControllerDelegate {
     

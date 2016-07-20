@@ -163,7 +163,6 @@
 				0352AA521D3EF17A00201A1F /* Utility */,
 				0352AA701D3F01CE00201A1F /* Views */,
 				0352AA6F1D3F01C300201A1F /* ViewControllers */,
-				0352AA5A1D3EF46600201A1F /* Protocols */,
 				0352AA551D3EF1B800201A1F /* Model */,
 				0352AA511D3EF16800201A1F /* Coordinators */,
 				0352AA501D3EF16000201A1F /* Support */,
@@ -205,6 +204,7 @@
 		0352AA511D3EF16800201A1F /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
+				0352AA921D3F1B9000201A1F /* Protocols */,
 				0352AA5F1D3EF4F900201A1F /* ApplicationCoordinator.swift */,
 				0352AA671D3EF79800201A1F /* AuthenticationCoordinator.swift */,
 			);
@@ -215,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				0352AA851D3F111300201A1F /* Result.swift */,
+				0352AA931D3F1BB100201A1F /* Protocols */,
 				0352AA541D3EF1AA00201A1F /* Errors */,
 				0352AA531D3EF19900201A1F /* StyleSheets */,
 			);
@@ -246,15 +247,6 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		0352AA5A1D3EF46600201A1F /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				0352AA5B1D3EF48300201A1F /* Coordinator.swift */,
-				0352AA631D3EF6D200201A1F /* Dumpable.swift */,
-			);
-			name = Protocols;
-			sourceTree = "<group>";
-		};
 		0352AA6F1D3F01C300201A1F /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,6 +267,22 @@
 			children = (
 				0352AA8A1D3F13C100201A1F /* FBType.swift */,
 				0352AA8E1D3F13E000201A1F /* FBSendable.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		0352AA921D3F1B9000201A1F /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				0352AA5B1D3EF48300201A1F /* Coordinator.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		0352AA931D3F1BB100201A1F /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				0352AA631D3EF6D200201A1F /* Dumpable.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";

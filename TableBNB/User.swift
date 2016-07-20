@@ -16,6 +16,8 @@ struct User: FBSendable {
     let email:      String
 }
 
+// MARK: - User Extension
+
 extension User {
     static let Path         = "users/"
     static let NeedsAutoKey = false

@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import Firebase // TODO: Delete!
 
+// MARK: - ApplicationCoordinator
+
 final class ApplicationCoordinator: Coordinator, AuthenticationCoordinatorDelegate {
     
     // MARK: - UIWindow
