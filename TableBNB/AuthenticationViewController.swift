@@ -105,7 +105,7 @@ final class AuthenticationViewController: UIViewController, UITextFieldDelegate 
     private func setNavigationItems() {
         if isSigningUp {
             navigateToLoginButton.target = self
-            navigateToLoginButton.action = #selector(AuthenticationViewController.navigateToLoginViewController(_:))
+            navigateToLoginButton.action = #selector(navigateToLoginViewController(_:))
             navigateToLoginButton.title  = AuthViewControllerStyleSheet.LoginTitle
             navigationItem.rightBarButtonItem = navigateToLoginButton
         }
