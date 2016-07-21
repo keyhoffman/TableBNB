@@ -20,7 +20,7 @@ enum AuthViewControllerStyleSheet {
     
     // MARK: - AuthTextField
     
-    enum AuthTextField {
+    enum TextField {
         case Email, Password, Username
         
         var textField: UITextField {
@@ -65,6 +65,8 @@ enum AuthViewControllerStyleSheet {
             }
         }
         
+        // MARK: - AuthTextField Frame
+        
         enum Frame {
             case WidthToViewWidthFactor, HeightToViewHeightFactor, TopToViewTopFactor
             
@@ -78,22 +80,30 @@ enum AuthViewControllerStyleSheet {
             
         }
     }
-
-}
-
-// MARK: - UITextField Extension
-
-extension UITextField { // TODO: - Move away from style sheet
-    func clearText() {
-        self.text = ""
-    }
     
-    func defaultSettings() {
-        self.adjustsFontSizeToFitWidth = true
-        self.autocapitalizationType    = .None
-        self.autocorrectionType        = .No
-        self.clearButtonMode           = .Always
-        self.keyboardAppearance        = .Dark
-        self.keyboardType              = .Default
+    // MARK: - ErrorLabel
+    
+    enum Label {
+        case Error
+        
+        var label: UILabel {
+            let l = UILabel()
+            l.hidden = true
+            l.backgroundColor = Color.White.color
+            l.textColor = Color.Red.color
+            l.textAlignment = .Center
+            return l
+        }
     }
 }
+
+enum AuthViewModelStyleSheet {
+    static var ValidPasswordCharacterCount: Int { return 5 }
+    static var ValidUsernameCharacterCount: Int { return 5 }
+}
+
+
+
+
+
+

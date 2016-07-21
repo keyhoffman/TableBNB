@@ -50,21 +50,10 @@ extension FBSendable {
         var FBDict: FBDictionary = [:]
         let mirror = Mirror(reflecting: self)
         for case let (label?, value) in mirror.children {
-            print("label = \(label), value dynamicType = \(value.dynamicType)")
+            print("label = \(label), value = \(value)")
             print("value subjectType = \(Mirror(reflecting: value).subjectType)")
             FBDict[label] = value as? AnyObject
         }
         return Dictionary(FBDict.filter { Self.FBSubKeys.contains($0.0) })
-    }
-}
-
-// MARK: - Dictionary Extension
-
-extension Dictionary { // TODO: - Move elsewhere
-    init(_ pairs: [Element]) {
-        self.init()
-        for (k, v) in pairs {
-            self[k] = v
-        }
     }
 }

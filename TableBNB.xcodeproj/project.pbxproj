@@ -52,6 +52,15 @@
 		0352AA961D3F48E000201A1F /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0352AA951D3F48E000201A1F /* AuthenticationViewModel.swift */; };
 		0352AA971D3F48E000201A1F /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0352AA951D3F48E000201A1F /* AuthenticationViewModel.swift */; };
 		0352AA981D3F48E000201A1F /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0352AA951D3F48E000201A1F /* AuthenticationViewModel.swift */; };
+		0352AA9E1D40466E00201A1F /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0352AA9D1D40466E00201A1F /* GCDBlackBox.swift */; };
+		0352AA9F1D40466E00201A1F /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0352AA9D1D40466E00201A1F /* GCDBlackBox.swift */; };
+		0352AAA01D40466E00201A1F /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0352AA9D1D40466E00201A1F /* GCDBlackBox.swift */; };
+		0352AAA21D40A5ED00201A1F /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0352AAA11D40A5ED00201A1F /* TextField.swift */; };
+		0352AAA31D40A5ED00201A1F /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0352AAA11D40A5ED00201A1F /* TextField.swift */; };
+		0352AAA41D40A5ED00201A1F /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0352AAA11D40A5ED00201A1F /* TextField.swift */; };
+		0352AAA71D40A63C00201A1F /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0352AAA61D40A63C00201A1F /* Dictionary.swift */; };
+		0352AAA81D40A63C00201A1F /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0352AAA61D40A63C00201A1F /* Dictionary.swift */; };
+		0352AAA91D40A63C00201A1F /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0352AAA61D40A63C00201A1F /* Dictionary.swift */; };
 		1DD23A5FADE4EEFEE2643FF8 /* Pods_TableBNB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0A9C694E68A05DE5C7A8B71 /* Pods_TableBNB.framework */; };
 		693B458B84420202D0DA8FAD /* Pods_TableBNBTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27DFEE2D97BF9F47DB2F7F0 /* Pods_TableBNBTests.framework */; };
 		F5A7C10D775BD715686E7D5B /* Pods_TableBNBUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF4336EDCFADC79BEFA1065B /* Pods_TableBNBUITests.framework */; };
@@ -100,6 +109,9 @@
 		0352AA8A1D3F13C100201A1F /* FBType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBType.swift; sourceTree = "<group>"; };
 		0352AA8E1D3F13E000201A1F /* FBSendable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBSendable.swift; sourceTree = "<group>"; };
 		0352AA951D3F48E000201A1F /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
+		0352AA9D1D40466E00201A1F /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
+		0352AAA11D40A5ED00201A1F /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		0352AAA61D40A63C00201A1F /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		1A4CC0F39F2F5C8CC11AB2F2 /* Pods-TableBNBUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TableBNBUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TableBNBUITests/Pods-TableBNBUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6ABCDA6A9736F658A8E0594E /* Pods-TableBNBTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TableBNBTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TableBNBTests/Pods-TableBNBTests.release.xcconfig"; sourceTree = "<group>"; };
 		882989AD7BBE6310427FF407 /* Pods-TableBNBUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TableBNBUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TableBNBUITests/Pods-TableBNBUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -219,6 +231,8 @@
 		0352AA521D3EF17A00201A1F /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				0352AAA51D40A5FA00201A1F /* Extensions */,
+				0352AA9D1D40466E00201A1F /* GCDBlackBox.swift */,
 				0352AA851D3F111300201A1F /* Result.swift */,
 				0352AA931D3F1BB100201A1F /* Protocols */,
 				0352AA541D3EF1AA00201A1F /* Errors */,
@@ -298,6 +312,15 @@
 				0352AA951D3F48E000201A1F /* AuthenticationViewModel.swift */,
 			);
 			name = ViewModels;
+			sourceTree = "<group>";
+		};
+		0352AAA51D40A5FA00201A1F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0352AAA11D40A5ED00201A1F /* TextField.swift */,
+				0352AAA61D40A63C00201A1F /* Dictionary.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		9CBAE593B191BCA3FA8C6E8E /* Pods */ = {
@@ -590,6 +613,7 @@
 				0352AA681D3EF79800201A1F /* AuthenticationCoordinator.swift in Sources */,
 				0352AA641D3EF6D200201A1F /* Dumpable.swift in Sources */,
 				0352AA961D3F48E000201A1F /* AuthenticationViewModel.swift in Sources */,
+				0352AAA21D40A5ED00201A1F /* TextField.swift in Sources */,
 				0352AA761D3F02EA00201A1F /* AuthViewControllerStyleSheet.swift in Sources */,
 				0352AA281D3EF12D00201A1F /* TableBNB.xcdatamodeld in Sources */,
 				0352AA7A1D3F030500201A1F /* General.swift in Sources */,
@@ -598,7 +622,9 @@
 				0352AA721D3F020800201A1F /* AuthenticationViewController.swift in Sources */,
 				0352AA5C1D3EF48300201A1F /* Coordinator.swift in Sources */,
 				0352AA8F1D3F13E000201A1F /* FBSendable.swift in Sources */,
+				0352AA9E1D40466E00201A1F /* GCDBlackBox.swift in Sources */,
 				0352AA601D3EF4F900201A1F /* ApplicationCoordinator.swift in Sources */,
+				0352AAA71D40A63C00201A1F /* Dictionary.swift in Sources */,
 				0352AA6C1D3EF85E00201A1F /* User.swift in Sources */,
 				0352AA861D3F111300201A1F /* Result.swift in Sources */,
 			);
@@ -609,8 +635,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0352AA971D3F48E000201A1F /* AuthenticationViewModel.swift in Sources */,
+				0352AAA81D40A63C00201A1F /* Dictionary.swift in Sources */,
 				0352AA771D3F02EA00201A1F /* AuthViewControllerStyleSheet.swift in Sources */,
 				0352AA5D1D3EF48300201A1F /* Coordinator.swift in Sources */,
+				0352AAA31D40A5ED00201A1F /* TextField.swift in Sources */,
 				0352AA691D3EF79800201A1F /* AuthenticationCoordinator.swift in Sources */,
 				0352AA7B1D3F030500201A1F /* General.swift in Sources */,
 				0352AA6D1D3EF85E00201A1F /* User.swift in Sources */,
@@ -621,6 +649,7 @@
 				0352AA901D3F13E000201A1F /* FBSendable.swift in Sources */,
 				0352AA8C1D3F13C100201A1F /* FBType.swift in Sources */,
 				0352AA651D3EF6D200201A1F /* Dumpable.swift in Sources */,
+				0352AA9F1D40466E00201A1F /* GCDBlackBox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -629,8 +658,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0352AA981D3F48E000201A1F /* AuthenticationViewModel.swift in Sources */,
+				0352AAA91D40A63C00201A1F /* Dictionary.swift in Sources */,
 				0352AA781D3F02EA00201A1F /* AuthViewControllerStyleSheet.swift in Sources */,
 				0352AA5E1D3EF48300201A1F /* Coordinator.swift in Sources */,
+				0352AAA41D40A5ED00201A1F /* TextField.swift in Sources */,
 				0352AA6A1D3EF79800201A1F /* AuthenticationCoordinator.swift in Sources */,
 				0352AA7C1D3F030500201A1F /* General.swift in Sources */,
 				0352AA6E1D3EF85E00201A1F /* User.swift in Sources */,
@@ -641,6 +672,7 @@
 				0352AA911D3F13E000201A1F /* FBSendable.swift in Sources */,
 				0352AA8D1D3F13C100201A1F /* FBType.swift in Sources */,
 				0352AA661D3EF6D200201A1F /* Dumpable.swift in Sources */,
+				0352AAA01D40466E00201A1F /* GCDBlackBox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

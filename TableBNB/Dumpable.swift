@@ -12,14 +12,20 @@ protocol Dumpable {}
 
 extension Dumpable {
     func dump_() {
-        print("----- \(Self.self) Dump -----")
+        let mirror = Mirror(reflecting: self)
+        print("----- \(mirror.description): \(Self.self) Dump -----")
         dump(self)
     }
     
-    func dumpWithContext(context: String) {
+    func dump_(withContext context: String) {
         print("----- \(context) -----")
         dump_()
     }
+    
 }
 
 extension Dictionary: Dumpable {}
+
+extension String: Dumpable {}
+
+extension Bool: Dumpable {}

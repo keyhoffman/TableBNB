@@ -9,31 +9,15 @@
 import UIKit
 import SnapKit
 
-// MARK: - AuthenticationViewControllerDelegate Protocol
-
-protocol AuthenticationViewControllerDelegate: class {
-    func signUp(email email: String?, password: String?, username: String?, sender: AuthenticationViewController)
-    func login(email email: String?, password: String?, sender: AuthenticationViewController)
-    func navigateToLoginButtonPressed(sender: AuthenticationViewController)
-}
-
 // MARK: - AuthenticationViewController
 
-final class AuthenticationViewController: UIViewController, UITextFieldDelegate {
+final class AuthenticationViewController: UIViewController, UITextFieldDelegate, AuthenticationViewModelViewDelegate {
     
-    // MARK: - User TextField Inputs
+    // MARK: - AuthenticationViewModelProtocol Declaration
     
-    private var enteredEmail:    String?
-    private var enteredPassword: String?
-    private var enteredUsername: String?
-    
-    // MARK: - isSigningUp Declaration
-    
-    private let isSigningUp: Bool
-    
-    // MARK: - AuthenticationViewControllerDelegate Declaration
-    
-    weak var delegate: AuthenticationViewControllerDelegate?
+    weak var viewModel: AuthenticationViewModelProtocol? {
+        didSet { viewModel?.viewDelegate = self }
+    }
     
     // MARK: - UIBarButtonItem Declaration
     
@@ -41,28 +25,19 @@ final class AuthenticationViewController: UIViewController, UITextFieldDelegate 
     
     // MARK: - TextField Declarations
     
-    private let emailTextField    = AuthViewControllerStyleSheet.AuthTextField.Email.textField
-    private let passwordTextField = AuthViewControllerStyleSheet.AuthTextField.Password.textField
-    private let usernameTextField = AuthViewControllerStyleSheet.AuthTextField.Username.textField
+    private let emailTextField    = AuthViewControllerStyleSheet.TextField.Email.textField
+    private let passwordTextField = AuthViewControllerStyleSheet.TextField.Password.textField
+    private let usernameTextField = AuthViewControllerStyleSheet.TextField.Username.textField
     
-    // MARK: - AuthenticationViewController Initializer
+    // MARK: - ErrorLabel Declaration
     
-    init(isSigningUp: Bool) {
-        self.isSigningUp = isSigningUp
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    private let errorLabel: UILabel = AuthViewControllerStyleSheet.Label.Error.label
     
     // MARK: - ViewController Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTextFields()
-        setTitle()
-        setNavigationItems()
+        setTextFieldsAndErrorLabel()
         view.backgroundColor = AuthViewControllerStyleSheet.BackgroundColor
     }
 
@@ -72,47 +47,47 @@ final class AuthenticationViewController: UIViewController, UITextFieldDelegate 
         guard let text = textField.text else { return false }
         if text.isEmpty { return false }
         switch textField {
-        case emailTextField:
-            enteredEmail = text
-            emailTextField.resignFirstResponder()
-            passwordTextField.becomeFirstResponder()
-            passwordTextField.hidden = false
-        case passwordTextField:
-            enteredPassword = text
-            switch isSigningUp {
-            case false: delegate?.login(email: enteredEmail, password: enteredPassword, sender: self)
-            case true:
-                passwordTextField.resignFirstResponder()
-                usernameTextField.becomeFirstResponder()
-                usernameTextField.hidden = false
-            }
-        case usernameTextField:
-            enteredUsername = text
-            delegate?.signUp(email: enteredEmail, password: enteredPassword, username: enteredUsername, sender: self)
+        case emailTextField:    viewModel?.email    = text
+        case passwordTextField: viewModel?.password = text
+        case usernameTextField: viewModel?.username = text
         default: fatalError("Invalid textfield")
         }
         return true
     }
     
-    // MARK: - Navigation Action Methods
+    // MARK: - AuthenticationViewModelViewDelegate Methods
     
-    func navigateToLoginViewController(sender: UIBarButtonItem) {
-        delegate?.navigateToLoginButtonPressed(self)
+    func emailIsValid(sender: AuthenticationViewModel) {
+        emailTextField.resignFirstResponder()
+        passwordTextField.becomeFirstResponder()
+        passwordTextField.hidden = false
+    }
+    
+    func passwordIsValid(sender: AuthenticationViewModel) {
+        passwordTextField.resignFirstResponder()
+        usernameTextField.becomeFirstResponder()
+        usernameTextField.hidden = false
+    }
+    
+    func anErrorHasOccured(errorMessage: String, sender: AuthenticationViewModel) {
+        errorLabel.text   = errorMessage
+        errorLabel.hidden = false
     }
     
     // MARK: - Set View Properties
     
-    private func setNavigationItems() {
-        if isSigningUp {
-            navigateToLoginButton.target = self
-            navigateToLoginButton.action = #selector(navigateToLoginViewController(_:))
-            navigateToLoginButton.title  = AuthViewControllerStyleSheet.LoginTitle
-            navigationItem.rightBarButtonItem = navigateToLoginButton
-        }
+    func setLoginNavigationItem(sender: AuthenticationViewModel) {
+        navigateToLoginButton.target = self
+        navigateToLoginButton.action = #selector(navigateToLoginButtonPressed)
+        navigateToLoginButton.title  = AuthViewControllerStyleSheet.LoginTitle
+        navigationItem.rightBarButtonItem = navigateToLoginButton
+    }
+    
+    func navigateToLoginButtonPressed() {
+        viewModel?.navigateToLoginButtonPressed()
     }
 
-
-    private func setTextFields() {
+    private func setTextFieldsAndErrorLabel() {
         emailTextField.delegate    = self
         passwordTextField.delegate = self
         usernameTextField.delegate = self
@@ -122,12 +97,13 @@ final class AuthenticationViewController: UIViewController, UITextFieldDelegate 
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
         view.addSubview(usernameTextField)
+        view.addSubview(errorLabel)
         
         emailTextField.snp_makeConstraints { make in
             make.centerX.equalTo(view.snp_centerX)
-            make.width.equalTo(view).multipliedBy(AuthViewControllerStyleSheet.AuthTextField.Frame.WidthToViewWidthFactor.value)
-            make.height.equalTo(view).multipliedBy(AuthViewControllerStyleSheet.AuthTextField.Frame.HeightToViewHeightFactor.value)
-            make.top.equalTo(view).offset(view.bounds.height * AuthViewControllerStyleSheet.AuthTextField.Frame.TopToViewTopFactor.value)
+            make.width.equalTo(view).multipliedBy(AuthViewControllerStyleSheet.TextField.Frame.WidthToViewWidthFactor.value)
+            make.height.equalTo(view).multipliedBy(AuthViewControllerStyleSheet.TextField.Frame.HeightToViewHeightFactor.value)
+            make.top.equalTo(view).offset(view.bounds.height * AuthViewControllerStyleSheet.TextField.Frame.TopToViewTopFactor.value)
         }
         
         passwordTextField.snp_makeConstraints { make in
@@ -142,16 +118,21 @@ final class AuthenticationViewController: UIViewController, UITextFieldDelegate 
             make.centerX.equalTo(emailTextField)
             make.top.equalTo(passwordTextField.snp_bottom)
             make.height.equalTo(emailTextField)
-            
+        }
+        
+        errorLabel.snp_makeConstraints { make in
+            make.centerX.width.equalTo(emailTextField)
+            make.bottom.equalTo(emailTextField.snp_top).offset(-10)
+            make.height.equalTo(30)
         }
 
     }
     
-    private func setTitle() {
-        if isSigningUp {
-            title = AuthViewControllerStyleSheet.SignUpTitle
-        } else {
-            title = AuthViewControllerStyleSheet.LoginTitle
-        }
+    func setTitle(title: String, sender: AuthenticationViewModel) {
+        self.title = title
     }
 }
+
+
+
+

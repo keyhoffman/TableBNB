@@ -45,10 +45,10 @@ final class ApplicationCoordinator: Coordinator, AuthenticationCoordinatorDelega
     // MARK: - AuthenticationCoordinatorDelegate Required Methods
     
     func userHasBeenAuthenticated(authenticatedUser user: User, sender: AuthenticationCoordinator) {
-        user.dumpWithContext("ApplicationCoordinator")
+        user.dump_(withContext: "ApplicationCoordinator")
     }
     
     func userHasBeenLoggedOut(loggedOutUser user: User, sender: AuthenticationCoordinator) {
-        user.dumpWithContext("ApplicationCoordinator ---- WTFFFFF")
+        user.dump_(withContext: "ApplicationCoordinator ---- WTFFFFF")
     }
 }

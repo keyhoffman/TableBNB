@@ -35,7 +35,7 @@ extension Authenticator {
 
 // MARK: - AuthenticationCoordinator
 
-final class AuthenticationCoordinator: SubCoordinator, Authenticator, AuthenticationViewControllerDelegate {
+final class AuthenticationCoordinator: SubCoordinator, Authenticator, AuthenticationViewModelCoordinatorDelegate {
     
     // MARK: - AuthenticationCoordinatorDelegate Declaration
     
@@ -48,19 +48,32 @@ final class AuthenticationCoordinator: SubCoordinator, Authenticator, Authentica
     
     // MARK: - ViewController Declarations
     
-    private let signUpViewController:  AuthenticationViewController
-    private let loginViewController:   AuthenticationViewController
+    private let signUpViewController: AuthenticationViewController
+    private let loginViewController:  AuthenticationViewController
+    
+    private let signUpViewModel = AuthenticationViewModel(isSigningUp: true)
+    private let loginViewModel  = AuthenticationViewModel(isSigningUp: false)
+    
+    private let signUpModel = AuthenticationModel()
+    private let loginModel  = AuthenticationModel()
     
     // MARK: - AuthenticationCoordinator Initializer
     
     init(window: UIWindow) {
         self.window = window
-        signUpViewController = AuthenticationViewController(isSigningUp: true)
-        loginViewController  = AuthenticationViewController(isSigningUp: false)
         
-
-        signUpViewController.delegate  = self
-        loginViewController.delegate   = self
+        signUpViewController = AuthenticationViewController()
+        loginViewController  = AuthenticationViewController()
+        
+        signUpViewController.viewModel = signUpViewModel
+        loginViewController.viewModel  = loginViewModel
+        
+        
+        signUpViewModel.model = signUpModel
+        loginViewModel.model  = loginModel
+        
+        signUpViewModel.coordinatorDelegate = self
+        loginViewModel.coordinatorDelegate  = self
     }
 
     
@@ -75,69 +88,14 @@ final class AuthenticationCoordinator: SubCoordinator, Authenticator, Authentica
         }
     }
     
-    func navigateToLoginButtonPressed(sender: AuthenticationViewController) {
-        rootViewController.pushViewController(loginViewController, animated: true)
-    }
-}
-
-// MARK: - AuthenticationViewControllerDelegate Methods
-
-extension Authenticator where Self: AuthenticationCoordinator, Self: AuthenticationViewControllerDelegate {
-    func login(email email: String?, password: String?, sender: AuthenticationViewController) {
-        guard let email = email, let password = password else {
-            print("Login Error")
-            return
-        }
-        FIRAuth.auth()?.signInWithEmail(email, password: password) { user, error in
-            if let error = error {
-                print(error.localizedDescription)
-                print("Login Error")
-                return
-            }
-            guard let user = user, let email = user.email, let username = user.displayName else {
-                print("Login Error")
-                return
-            }
-            let loggedInUser = User(key: user.uid, username: username, email: email)
-            self.coordinatorDelegate?.userHasBeenAuthenticated(authenticatedUser: loggedInUser, sender: self)
-            return
-        }
+    func userHasBeenAuthenticated(user user: User, sender: AuthenticationViewModel) {
+        user.dump_(withContext: "userHasBeenAuthenticated")
     }
     
-    func signUp(email email: String?, password: String?, username: String?, sender: AuthenticationViewController) {
-        guard let email = email, let password = password, let username = username else {
-            print("Sign Up Error")
-            return
-        }
-        FIRAuth.auth()?.createUserWithEmail(email, password: password) { user, error in
-            if let error = error {
-                print(error.localizedDescription)
-                print("Sign Up Error")
-                return
-            }
-            guard let user = user else {
-                print("Sign Up Error")
-                return
-            }
-            let changeRequest = user.profileChangeRequest()
-            changeRequest.displayName = username
-            changeRequest.commitChangesWithCompletion { error in
-                if let error = error {
-                    print(error.localizedDescription)
-                    print("Sign Up Error")
-                    return
-                }
-                let logggedInUser = User(key: user.uid, username: username, email: email)
-                logggedInUser.sendToFB { result in
-                    switch result {
-                    case .Failure(let err):  print(err._domain)
-                    case .Success(let user): self.coordinatorDelegate?.userHasBeenAuthenticated(authenticatedUser: user, sender: self)
-                    }
-                }
-                return
-            }
-        }
+    func navigateToLoginButtonPressed(sender: AuthenticationViewModel) {
+        rootViewController.pushViewController(loginViewController, animated: true)
     }
+    
 }
 
 
