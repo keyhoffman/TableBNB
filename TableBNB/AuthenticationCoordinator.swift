@@ -17,15 +17,15 @@ protocol AuthenticationCoordinatorDelegate: class {
     func userHasBeenLoggedOut(loggedOutUser user: User, sender: AuthenticationCoordinator)
 }
 
-// MARK: - Authenticator Protocol
+// MARK: - AuthenticationChecker Protocol
 
-protocol Authenticator {
+protocol AuthenticationChecker {
     func checkCurrentUser() -> User?
 }
 
-// MARK: - Authenticator Protocol Extension
+// MARK: - AuthenticationChecker Protocol Extension
 
-extension Authenticator {
+extension AuthenticationChecker {
     func checkCurrentUser() -> User? {
         let auth = FIRAuth.auth()
         guard let key = auth?.currentUser?.uid, email = auth?.currentUser?.email, username = auth?.currentUser?.displayName  else { return nil }
@@ -35,7 +35,7 @@ extension Authenticator {
 
 // MARK: - AuthenticationCoordinator
 
-final class AuthenticationCoordinator: SubCoordinator, Authenticator, AuthenticationViewModelCoordinatorDelegate {
+final class AuthenticationCoordinator: SubCoordinator, AuthenticationChecker, AuthenticationViewModelCoordinatorDelegate {
     
     // MARK: - AuthenticationCoordinatorDelegate Declaration
     
@@ -55,7 +55,7 @@ final class AuthenticationCoordinator: SubCoordinator, Authenticator, Authentica
     private let loginViewModel  = AuthenticationViewModel(isSigningUp: false)
     
     private let signUpModel = AuthenticationModel()
-    private let loginModel  = AuthenticationModel()
+    private var loginModel  = AuthenticationModel()
     
     // MARK: - AuthenticationCoordinator Initializer
     
@@ -67,7 +67,6 @@ final class AuthenticationCoordinator: SubCoordinator, Authenticator, Authentica
         
         signUpViewController.viewModel = signUpViewModel
         loginViewController.viewModel  = loginViewModel
-        
         
         signUpViewModel.model = signUpModel
         loginViewModel.model  = loginModel

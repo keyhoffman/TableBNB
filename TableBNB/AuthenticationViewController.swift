@@ -55,6 +55,10 @@ final class AuthenticationViewController: UIViewController, UITextFieldDelegate,
         return true
     }
     
+    func textFieldDidBeginEditing(textField: UITextField) {
+        errorLabel.hidden = true
+    }
+    
     // MARK: - AuthenticationViewModelViewDelegate Methods
     
     func emailIsValid(sender: AuthenticationViewModel) {
@@ -85,6 +89,10 @@ final class AuthenticationViewController: UIViewController, UITextFieldDelegate,
     
     func navigateToLoginButtonPressed() {
         viewModel?.navigateToLoginButtonPressed()
+    }
+    
+    func setTitle(title: String, sender: AuthenticationViewModel) {
+        self.title = title
     }
 
     private func setTextFieldsAndErrorLabel() {
@@ -128,9 +136,6 @@ final class AuthenticationViewController: UIViewController, UITextFieldDelegate,
 
     }
     
-    func setTitle(title: String, sender: AuthenticationViewModel) {
-        self.title = title
-    }
 }
 
 

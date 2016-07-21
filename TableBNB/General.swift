@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+// TODO: Set a general theme for the app and set all of the view controller style elements to the them color
+
 // MARK: - BackgroundColor
 
 enum Color {

@@ -162,6 +162,7 @@ protocol AuthenticationModelProtocol: class {
     func signUp(email email: String, password: String, username: String, withResult: Result<User> -> Void)
 }
 
+
 final class AuthenticationModel: AuthenticationModelProtocol {
     
     func login(email email: String, password: String, withResult: Result<User> -> Void) {
