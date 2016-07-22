@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 import Firebase
 
 // MARK: - FirebaseSendable Protocol
@@ -17,14 +16,21 @@ protocol FBSendable: FBType, Equatable {
     
     static var NeedsAutoKey: Bool        { get }
     static var FBSubKeys:   [String]     { get }
+    static var Resource_: Resource<Self> { get }
+    
+    static func Create(FBDict: FBDictionary?) -> Result<Self>
 }
 
 // MARK: - FirebaseSendable Protocol Extension
 
 extension FBSendable {
     
-    private var sendingError: NSError {
+    private var sendingError: NSError { // TODO: Move this elsewhere
         return NSError(domain: "TableBNB", code: 1, userInfo: [NSLocalizedDescriptionKey: "Could not convert \(Self.self) to FBDictionary"])
+    }
+    
+    static var instantiationError: NSError {
+        return NSError(domain: "TableBNB", code: 2, userInfo: [NSLocalizedDescriptionKey: "Could not instantiate \(Self.self)"])
     }
     
     func sendToFB(withResult: Result<Self> -> Void) {

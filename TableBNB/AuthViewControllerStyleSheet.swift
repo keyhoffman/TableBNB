@@ -81,6 +81,18 @@ enum AuthViewControllerStyleSheet {
         }
     }
     
+    // MARK: - BarButtonItem
+    
+    enum BarButtonItem {
+        case NavigateToLogin
+        
+        var barButtonItem: UIBarButtonItem {
+            let b = UIBarButtonItem()
+            b.title = "Login"
+            return b
+        }
+    }
+    
     // MARK: - ErrorLabel
     
     enum Label {
@@ -94,12 +106,28 @@ enum AuthViewControllerStyleSheet {
             l.textAlignment = .Center
             return l
         }
+        
+        // MARK: - ErrorLabel Frame
+        
+        enum Frame {
+            case Height, BottomToEmailTextFieldToOffset
+            
+            var value: CGFloat {
+                switch self {
+                case .Height:                         return 30
+                case .BottomToEmailTextFieldToOffset: return -10
+                }
+            }
+        }
     }
 }
 
 enum AuthViewModelStyleSheet {
     static var ValidPasswordCharacterCount: Int { return 5 }
     static var ValidUsernameCharacterCount: Int { return 5 }
+    
+    static var ValidEmailPredicateArguments: String { return "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,32}" }
+    static var ValidEmailPredicateFormat:    String { return "SELF MATCHES %@" }
 }
 
 

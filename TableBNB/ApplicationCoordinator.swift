@@ -12,7 +12,7 @@ import Firebase // TODO: Delete!
 
 // MARK: - ApplicationCoordinator
 
-final class ApplicationCoordinator: Coordinator, AuthenticationCoordinatorDelegate {
+final class ApplicationCoordinator: Coordinator, AuthenticationCoordinatorDelegate, TabBarCoordinatorDelegate {
     
     // MARK: - UIWindow
     
@@ -21,7 +21,7 @@ final class ApplicationCoordinator: Coordinator, AuthenticationCoordinatorDelega
     // MARK: - Sub-Coordinator Declarations
     
     private let authenticationCoordinator: AuthenticationCoordinator
-//    private let tabBarCoordinator:         TabBarCoordinator
+    private let tabBarCoordinator:         TabBarCoordinator
     
     // MARK: - ApplicationCoordinator Initializer
     
@@ -29,26 +29,27 @@ final class ApplicationCoordinator: Coordinator, AuthenticationCoordinatorDelega
         self.window = window
         
         authenticationCoordinator = AuthenticationCoordinator(window: self.window)
-//        tabBarCoordinator         = TabBarCoordinator(window: self.window)
-//        
+        tabBarCoordinator         = TabBarCoordinator(window: self.window)
+
         authenticationCoordinator.coordinatorDelegate = self
-//        tabBarCoordinator.coordinatorDelegate         = self
+        tabBarCoordinator.coordinatorDelegate         = self
     }
     
     // MARK: - Coordinator Required Methods 
     
     func start() {
-        try! FIRAuth.auth()?.signOut() // TODO: Delete!
+//        try! FIRAuth.auth()?.signOut() // TODO: Delete!
         authenticationCoordinator.start()
     }
     
     // MARK: - AuthenticationCoordinatorDelegate Required Methods
     
-    func userHasBeenAuthenticated(authenticatedUser user: User, sender: AuthenticationCoordinator) {
-        user.dump_(withContext: "ApplicationCoordinator")
+    func userHasBeenAuthenticated(user user: User, sender: AuthenticationCoordinator) {
+        tabBarCoordinator.start()
     }
     
     func userHasBeenLoggedOut(loggedOutUser user: User, sender: AuthenticationCoordinator) {
         user.dump_(withContext: "ApplicationCoordinator ---- WTFFFFF")
+        fatalError()
     }
 }

@@ -21,7 +21,7 @@ final class AuthenticationViewController: UIViewController, UITextFieldDelegate,
     
     // MARK: - UIBarButtonItem Declaration
     
-    private let navigateToLoginButton = UIBarButtonItem()
+    private let navigateToLoginButton = AuthViewControllerStyleSheet.BarButtonItem.NavigateToLogin.barButtonItem
     
     // MARK: - TextField Declarations
     
@@ -83,7 +83,6 @@ final class AuthenticationViewController: UIViewController, UITextFieldDelegate,
     func setLoginNavigationItem(sender: AuthenticationViewModel) {
         navigateToLoginButton.target = self
         navigateToLoginButton.action = #selector(navigateToLoginButtonPressed)
-        navigateToLoginButton.title  = AuthViewControllerStyleSheet.LoginTitle
         navigationItem.rightBarButtonItem = navigateToLoginButton
     }
     
@@ -130,8 +129,8 @@ final class AuthenticationViewController: UIViewController, UITextFieldDelegate,
         
         errorLabel.snp_makeConstraints { make in
             make.centerX.width.equalTo(emailTextField)
-            make.bottom.equalTo(emailTextField.snp_top).offset(-10)
-            make.height.equalTo(30)
+            make.bottom.equalTo(emailTextField.snp_top).offset(AuthViewControllerStyleSheet.Label.Frame.BottomToEmailTextFieldToOffset.value)
+            make.height.equalTo(AuthViewControllerStyleSheet.Label.Frame.Height.value)
         }
 
     }

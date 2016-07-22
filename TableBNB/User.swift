@@ -22,6 +22,20 @@ extension User {
     static let Path         = "users/"
     static let NeedsAutoKey = false
     static let FBSubKeys    = ["username", "email"]
+    static let Resource_    = Resource(parse: User.Create)
+}
+
+// MARK: - User "createNew" Initializer Extension
+// FIXME: - Change FBDict keys from string literals
+
+extension User {
+    static func Create(FBDict: FBDictionary?) -> Result<User> {
+        guard let FBDict = FBDict else { return .Failure(instantiationError) }
+        guard let email = FBDict["email"] as? String, let username = FBDict["username"] as? String, let key = FBDict["key"] as? String else {
+            return .Failure(instantiationError)
+        }
+        return .Success(User(key: key, username: username, email: email))
+    }
 }
 
 // MARK: - User Equatability

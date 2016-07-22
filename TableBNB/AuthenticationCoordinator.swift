@@ -13,7 +13,7 @@ import Firebase
 // MARK: - AuthenticationCoordinatorDelegate Protocol
 
 protocol AuthenticationCoordinatorDelegate: class {
-    func userHasBeenAuthenticated(authenticatedUser user: User, sender: AuthenticationCoordinator)
+    func userHasBeenAuthenticated(user user: User, sender: AuthenticationCoordinator)
     func userHasBeenLoggedOut(loggedOutUser user: User, sender: AuthenticationCoordinator)
 }
 
@@ -51,11 +51,15 @@ final class AuthenticationCoordinator: SubCoordinator, AuthenticationChecker, Au
     private let signUpViewController: AuthenticationViewController
     private let loginViewController:  AuthenticationViewController
     
+    // MARK: - ViewModel Declarations
+    
     private let signUpViewModel = AuthenticationViewModel(isSigningUp: true)
     private let loginViewModel  = AuthenticationViewModel(isSigningUp: false)
     
+    // MARK: - Model Declarations
+    
     private let signUpModel = AuthenticationModel()
-    private var loginModel  = AuthenticationModel()
+    private let loginModel  = AuthenticationModel()
     
     // MARK: - AuthenticationCoordinator Initializer
     
@@ -76,10 +80,10 @@ final class AuthenticationCoordinator: SubCoordinator, AuthenticationChecker, Au
     }
 
     
-    // MARK: SubCoordinator Required Methods
+    // MARK: - SubCoordinator Required Methods
     
     func start() {
-        if let user = checkCurrentUser() { coordinatorDelegate?.userHasBeenAuthenticated(authenticatedUser: user, sender: self) }
+        if let user = checkCurrentUser() { coordinatorDelegate?.userHasBeenAuthenticated(user: user, sender: self) }
         else {
             window.rootViewController = rootViewController
             window.makeKeyAndVisible()
@@ -87,8 +91,10 @@ final class AuthenticationCoordinator: SubCoordinator, AuthenticationChecker, Au
         }
     }
     
+    // MARK: - AuthenticationViewModelCoordinatorDelegate Required Methods
+    
     func userHasBeenAuthenticated(user user: User, sender: AuthenticationViewModel) {
-        user.dump_(withContext: "userHasBeenAuthenticated")
+        coordinatorDelegate?.userHasBeenAuthenticated(user: user, sender: self)
     }
     
     func navigateToLoginButtonPressed(sender: AuthenticationViewModel) {

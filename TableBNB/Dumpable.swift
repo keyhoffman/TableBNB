@@ -8,12 +8,15 @@
 
 import Foundation
 
+// MARK: - Dumpable Protocol
+
 protocol Dumpable {}
+
+// MARK: - Dumpable Protocol Extension
 
 extension Dumpable {
     func dump_() {
-        let mirror = Mirror(reflecting: self)
-        print("----- \(mirror.description): \(Self.self) Dump -----")
+        print("----- \(Self.self) Dump -----")
         dump(self)
     }
     
@@ -24,8 +27,14 @@ extension Dumpable {
     
 }
 
+// MARK: - Dictionary Extension
+
 extension Dictionary: Dumpable {}
 
+// MARK: - String Extension
+
 extension String: Dumpable {}
+
+// MARK: - Boolean Extension
 
 extension Bool: Dumpable {}

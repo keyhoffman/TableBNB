@@ -7,12 +7,15 @@
 //
 
 import Foundation
-import Firebase
+
+// MARK: - AuthenticationViewModelCoordinatorDelegate
 
 protocol AuthenticationViewModelCoordinatorDelegate: class {
     func userHasBeenAuthenticated(user user: User, sender: AuthenticationViewModel)
     func navigateToLoginButtonPressed(sender: AuthenticationViewModel)
 }
+
+// MARK: - AuthenticationViewModelViewDelegate
 
 protocol AuthenticationViewModelViewDelegate: class {
     func anErrorHasOccured(errorMessage: String, sender: AuthenticationViewModel)
@@ -21,6 +24,8 @@ protocol AuthenticationViewModelViewDelegate: class {
     func setLoginNavigationItem(sender: AuthenticationViewModel)
     func setTitle(title: String, sender: AuthenticationViewModel)
 }
+
+// MARK: - AuthenticationViewModelProtocol
 
 protocol AuthenticationViewModelProtocol: class, Dumpable {
     var isSigningUp: Bool { get }
@@ -45,9 +50,13 @@ protocol AuthenticationViewModelProtocol: class, Dumpable {
     init(isSigningUp: Bool)
 }
 
+// MARK: - AuthenticationViewModel
+
 final class AuthenticationViewModel: AuthenticationViewModelProtocol {
     
-    var email: String = "" {
+    // MARK: - User Input Declarations
+    
+    var email: String = String.emptyString() {
         didSet {
             emailIsValid = validateEmailFormat(email)
             if emailIsValid  { viewDelegate?.emailIsValid(self) }
@@ -55,18 +64,18 @@ final class AuthenticationViewModel: AuthenticationViewModelProtocol {
         }
     }
     
-    var password: String = "" {
+    var password: String = String.emptyString() {
         didSet {
             passwordIsValid = validatePasswordFormat(password)
             if passwordIsValid {
-                if isSigningUp { viewDelegate?.passwordIsValid(self) }
-                if !isSigningUp  { submitAuthenticationRequest() }
+                if isSigningUp  { viewDelegate?.passwordIsValid(self) }
+                if !isSigningUp { submitAuthenticationRequest() }
             }
             if !passwordIsValid { viewDelegate?.anErrorHasOccured("Invalid password format", sender: self) } // TODO: Move string literal elsewhere
         }
     }
     
-    var username: String = "" {
+    var username: String = String.emptyString() {
         didSet {
             usernameIsValid = validateUsernameFormat(username)
             if usernameIsValid {
@@ -76,6 +85,8 @@ final class AuthenticationViewModel: AuthenticationViewModelProtocol {
             if !usernameIsValid { viewDelegate?.anErrorHasOccured("Invalid username format", sender: self) } // TODO: Move string literal elsewhere
         }
     }
+    
+    // MARK: - User Input Validation Declarations
     
     let validPasswordCharacterCount = AuthViewModelStyleSheet.ValidPasswordCharacterCount
     let validUsernameCharacterCount = AuthViewModelStyleSheet.ValidUsernameCharacterCount
@@ -92,6 +103,8 @@ final class AuthenticationViewModel: AuthenticationViewModelProtocol {
         }
     }
     
+    // MARK: - Delegate and Model Declarations
+    
     weak var model: AuthenticationModelProtocol?
     weak var coordinatorDelegate: AuthenticationViewModelCoordinatorDelegate?
     weak var viewDelegate: AuthenticationViewModelViewDelegate? {
@@ -104,15 +117,21 @@ final class AuthenticationViewModel: AuthenticationViewModelProtocol {
         }
     }
     
+    // MARK: - Authentication Action Declaration
+    
     let isSigningUp: Bool
     
     init(isSigningUp: Bool) {
         self.isSigningUp = isSigningUp
     }
     
+    // MARK: - Navigation Methods
+    
     func navigateToLoginButtonPressed() {
         coordinatorDelegate?.navigateToLoginButtonPressed(self)
     }
+    
+    // MARK: - Authentication Submission Methods
     
     private func submitAuthenticationRequest() {
         guard let model = model where canSubmitAuthenticationRequest else {
@@ -121,7 +140,7 @@ final class AuthenticationViewModel: AuthenticationViewModelProtocol {
         }
         
         if isSigningUp  { model.signUp(email: email, password: password, username: username) { self.handleAuthentication(withResult: $0) } }
-        if !isSigningUp { model.login(email: email, password: password) { self.handleAuthentication(withResult: $0) } }
+        if !isSigningUp { model.login(email: email, password: password)                      { self.handleAuthentication(withResult: $0) } }
     }
     
     private func handleAuthentication(withResult result: Result<User>) {
@@ -131,9 +150,11 @@ final class AuthenticationViewModel: AuthenticationViewModelProtocol {
         }
     }
     
+    // MARK: - User Input Validation Methods
+    
     private func validateEmailFormat(email: String) -> Bool {
-        let arguments = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,32}" // TODO: Move string literal elsewhere
-        let format = "SELF MATCHES %@"
+        let format    = AuthViewModelStyleSheet.ValidEmailPredicateFormat
+        let arguments = AuthViewModelStyleSheet.ValidEmailPredicateArguments
         return NSPredicate(format: format, arguments).evaluateWithObject(email)
     }
     
@@ -157,62 +178,3 @@ final class AuthenticationViewModel: AuthenticationViewModelProtocol {
 
 
 
-protocol AuthenticationModelProtocol: class {
-    func login(email email: String, password: String, withResult: Result<User> -> Void)
-    func signUp(email email: String, password: String, username: String, withResult: Result<User> -> Void)
-}
-
-
-final class AuthenticationModel: AuthenticationModelProtocol {
-    
-    func login(email email: String, password: String, withResult: Result<User> -> Void) {
-        FIRAuth.auth()?.signInWithEmail(email, password: password) { user, error in
-            if let error = error {
-                print(error.localizedDescription)
-                withResult(.Failure(error))
-                return
-            }
-            guard let user = user, let email = user.email, let username = user.displayName else { // TODO: Move string literal elsewhere
-                let error = NSError(domain: "TableBNB", code: 1, userInfo: [NSLocalizedDescriptionKey: "Could not create atomic user"])
-                withResult(.Failure(error))
-                return
-            }
-            let loggedInUser = User(key: user.uid, username: username, email: email)
-            withResult(.Success(loggedInUser))
-            return
-        }
-
-    }
-    
-    func signUp(email email: String, password: String, username: String, withResult: Result<User> -> Void) {
-        FIRAuth.auth()?.createUserWithEmail(email, password: password) { user, error in
-            if let error = error {
-                print(error.localizedDescription)
-                withResult(.Failure(error))
-                return
-            }
-            guard let user = user else { // TODO: Move string literal elsewhere
-                let error = NSError(domain: "TableBNB", code: 1, userInfo: [NSLocalizedDescriptionKey: "Could not create atomic user"])
-                withResult(.Failure(error))
-                return
-            }
-            let changeRequest = user.profileChangeRequest()
-            changeRequest.displayName = username
-            changeRequest.commitChangesWithCompletion { error in
-                if let error = error {
-                    print(error.localizedDescription)
-                    withResult(.Failure(error))
-                    return
-                }
-                let logggedInUser = User(key: user.uid, username: username, email: email)
-                logggedInUser.sendToFB { result in
-                    switch result {
-                    case .Failure(let error): withResult(.Failure(error))
-                    case .Success(let user):  withResult(.Success(user))
-                    }
-                }
-                return
-            }
-        }
-    }
-}
