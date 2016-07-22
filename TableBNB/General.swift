@@ -11,18 +11,18 @@ import UIKit
 
 // TODO: Set a general theme for the app and set all of the view controller style elements to the them color
 
-// MARK: - BackgroundColor
+// MARK: - Color
 
 enum Color {
     case White, Cyan, LightGray, Blue, Red
     
     var color: UIColor {
         switch self {
-        case .White:     return .whiteColor()
-        case .Cyan:      return .cyanColor()
-        case .LightGray: return .lightGrayColor()
-        case .Blue:      return .blueColor()
-        case .Red:       return .redColor()
+        case White:     return .whiteColor()
+        case Cyan:      return .cyanColor()
+        case LightGray: return .lightGrayColor()
+        case Blue:      return .blueColor()
+        case Red:       return .redColor()
         }
     }
 }

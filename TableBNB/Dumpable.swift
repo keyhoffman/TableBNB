@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 // MARK: - Dumpable Protocol
 
@@ -38,3 +39,7 @@ extension String: Dumpable {}
 // MARK: - Boolean Extension
 
 extension Bool: Dumpable {}
+
+// MARK: UIImage Extension
+
+extension UIImage: Dumpable {}

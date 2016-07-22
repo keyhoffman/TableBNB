@@ -11,7 +11,10 @@ import UIKit
 
 // MARK: - AuthViewControllerStyleSheet
 
-enum AuthViewControllerStyleSheet {
+enum AuthViewControllerStyleSheet: ViewPreparer {
+    
+    // TODO: Possibly add this???
+    static func prepare(subject: AuthenticationViewController) {}
     
     static var BackgroundColor: UIColor { return Color.Red.color }
     
@@ -26,42 +29,42 @@ enum AuthViewControllerStyleSheet {
         var textField: UITextField {
             let tf = UITextField()
             tf.defaultSettings()
-            tf.placeholder = placeholder
+            tf.placeholder     = placeholder
             tf.backgroundColor = backgroundColor
             tf.secureTextEntry = secureTextEntry
-            tf.hidden = hidden
+            tf.hidden          = hidden
             return tf
         }
         
         private var placeholder: String {
             switch self {
-            case .Email:    return "Enter your email"
-            case .Password: return "Enter your password"
-            case .Username: return "Enter your username"
+            case Email:    return "Enter your email"
+            case Password: return "Enter your password"
+            case Username: return "Enter your username"
             }
         }
         
         private var backgroundColor: UIColor {
             switch self {
-            case .Email:    return Color.Blue.color
-            case .Password: return Color.LightGray.color
-            case .Username: return Color.Cyan.color
+            case Email:    return Color.Blue.color
+            case Password: return Color.LightGray.color
+            case Username: return Color.Cyan.color
             }
         }
         
         private var secureTextEntry: Bool {
             switch self {
-            case .Email:    return false
-            case .Password: return true
-            case .Username: return false
+            case Email:    return false
+            case Password: return true
+            case Username: return false
             }
         }
         
         private var hidden: Bool {
             switch self {
-            case .Email:    return false
-            case .Password: return true
-            case .Username: return true
+            case Email:    return false
+            case Password: return true
+            case Username: return true
             }
         }
         
@@ -72,9 +75,9 @@ enum AuthViewControllerStyleSheet {
             
             var value: CGFloat {
                 switch self {
-                case .WidthToViewWidthFactor:   return 0.80
-                case .HeightToViewHeightFactor: return 0.05
-                case .TopToViewTopFactor:       return 0.20
+                case WidthToViewWidthFactor:   return 0.80
+                case HeightToViewHeightFactor: return 0.05
+                case TopToViewTopFactor:       return 0.20
                 }
             }
             
@@ -100,10 +103,10 @@ enum AuthViewControllerStyleSheet {
         
         var label: UILabel {
             let l = UILabel()
-            l.hidden = true
+            l.hidden          = true
             l.backgroundColor = Color.White.color
-            l.textColor = Color.Red.color
-            l.textAlignment = .Center
+            l.textColor       = Color.Red.color
+            l.textAlignment   = .Center
             return l
         }
         
@@ -114,8 +117,8 @@ enum AuthViewControllerStyleSheet {
             
             var value: CGFloat {
                 switch self {
-                case .Height:                         return 30
-                case .BottomToEmailTextFieldToOffset: return -10
+                case Height:                         return 30
+                case BottomToEmailTextFieldToOffset: return -10
                 }
             }
         }

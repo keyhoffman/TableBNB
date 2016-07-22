@@ -38,17 +38,17 @@ final class ApplicationCoordinator: Coordinator, AuthenticationCoordinatorDelega
     // MARK: - Coordinator Required Methods 
     
     func start() {
-//        try! FIRAuth.auth()?.signOut() // TODO: Delete!
+        try! FIRAuth.auth()?.signOut() // TODO: Delete!
         authenticationCoordinator.start()
     }
     
     // MARK: - AuthenticationCoordinatorDelegate Required Methods
     
-    func userHasBeenAuthenticated(user user: User, sender: AuthenticationCoordinator) {
+    func userHasBeenAuthenticated(user user: User) {
         tabBarCoordinator.start()
     }
     
-    func userHasBeenLoggedOut(loggedOutUser user: User, sender: AuthenticationCoordinator) {
+    func userHasBeenLoggedOut(loggedOutUser user: User) {
         user.dump_(withContext: "ApplicationCoordinator ---- WTFFFFF")
         fatalError()
     }

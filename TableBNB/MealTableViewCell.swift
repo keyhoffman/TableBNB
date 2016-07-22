@@ -8,35 +8,52 @@
 
 import UIKit
 
+//MARK: - MealTableViewCell
+
 final class MealTableViewCell: UITableViewCell, Configurable {
 
-    struct ViewData {
-        let name:           String
-        let pricePerPerson: Double
-        let feeds:          Int
+    //MARK: - MealTableViewCell Initializer
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        // TODO: Move all view logic to here
+        
+        MealCellStyleSheet.prepare(self)
     }
     
-    var viewData: ViewData? {
-        didSet {
-            textLabel?.text       = viewData?.name
-            detailTextLabel?.text = String(viewData?.pricePerPerson)
-        }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Configurable Required Methods
-    
-    func configure(withItem item: Any) {
+    // TODO:   Move all data logic to here
+    func configure(withItem item: Meal) {
         
     }
     
 }
 
-// MARK: - MealTableViewCell Extension
-
-extension MealTableViewCell.ViewData {
-    init(meal: Meal) {
-        self.name           = meal.name
-        self.pricePerPerson = meal.pricePerPerson
-        self.feeds          = meal.feeds
-    }
-}
+//// MARK: - MealTableViewCell Extension
+//
+//struct ViewData {
+//    let name:           String
+//    let pricePerPerson: Double
+//    let feeds:          Int
+//}
+//
+//var viewData: ViewData? {
+//didSet {
+//    textLabel?.text       = viewData?.name
+//    detailTextLabel?.text = String(viewData?.pricePerPerson)
+//}
+//}
+//
+//
+//extension MealTableViewCell.ViewData {
+//    init(meal: Meal) {
+//        self.name           = meal.name
+//        self.pricePerPerson = meal.pricePerPerson
+//        self.feeds          = meal.feeds
+//    }
+//}

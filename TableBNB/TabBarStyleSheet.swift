@@ -28,25 +28,25 @@ enum TabBarStyleSheet {
     
     private var title: String {
         switch self {
-        case .AddMeal:     return "Add Meal"
-        case .BrowseMeals: return "Browse Meals"
-        case .UserProfile: return "Profile"
+        case AddMeal:     return "Add Meal"
+        case BrowseMeals: return "Browse Meals"
+        case UserProfile: return "Profile"
         }
     }
     
     private var image: UIImage? {
         switch self {
-        case .AddMeal:     return nil
-        case .BrowseMeals: return nil
-        case .UserProfile: return nil
+        case AddMeal:     return nil
+        case BrowseMeals: return nil
+        case UserProfile: return nil
         }
     }
     
     private var tag: Int {
         switch self {
-        case .AddMeal:     return 0
-        case .BrowseMeals: return 1
-        case .UserProfile: return 2
+        case AddMeal:     return 0
+        case BrowseMeals: return 1
+        case UserProfile: return 2
         }
     }
 

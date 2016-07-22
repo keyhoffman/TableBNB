@@ -11,7 +11,7 @@ import UIKit
 
 // MARK: - BrowseMealsTableViewController
 
-final class BrowseMealsTableViewController: TableViewController<Meal, MealTableViewCell>, BrowseMealsViewModelViewDelegate {
+final class BrowseMealsTableViewController: TableViewController<MealTableViewCell>, BrowseMealsViewModelViewDelegate {
     
     weak var viewModel: BrowseMealsViewModelProtocol? {
         didSet { viewModel?.viewDelegate = self }
@@ -23,5 +23,9 @@ final class BrowseMealsTableViewController: TableViewController<Meal, MealTableV
         super.viewDidLoad()
         
         title = BrowseMealsStyleSheet.title
+    }
+    
+    func anErrorHasOccured(errorMessage: String) {
+        title = title ?? String.emptyString() + errorMessage
     }
 }

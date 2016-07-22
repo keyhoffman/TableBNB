@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum Result<T> {
     typealias Value = T

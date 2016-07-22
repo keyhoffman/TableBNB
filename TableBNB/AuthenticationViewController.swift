@@ -34,6 +34,7 @@ final class AuthenticationViewController: UIViewController, UITextFieldDelegate,
     private let errorLabel: UILabel = AuthViewControllerStyleSheet.Label.Error.label
     
     // MARK: - ViewController Lifecycle
+    // TODO:   Add A Prepare Method!!!!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,26 +62,26 @@ final class AuthenticationViewController: UIViewController, UITextFieldDelegate,
     
     // MARK: - AuthenticationViewModelViewDelegate Methods
     
-    func emailIsValid(sender: AuthenticationViewModel) {
+    func emailIsValid() {
         emailTextField.resignFirstResponder()
         passwordTextField.becomeFirstResponder()
         passwordTextField.hidden = false
     }
     
-    func passwordIsValid(sender: AuthenticationViewModel) {
+    func passwordIsValid() {
         passwordTextField.resignFirstResponder()
         usernameTextField.becomeFirstResponder()
         usernameTextField.hidden = false
     }
     
-    func anErrorHasOccured(errorMessage: String, sender: AuthenticationViewModel) {
+    func anErrorHasOccured(errorMessage: String) {
         errorLabel.text   = errorMessage
         errorLabel.hidden = false
     }
     
     // MARK: - Set View Properties
     
-    func setLoginNavigationItem(sender: AuthenticationViewModel) {
+    func setLoginNavigationItem() {
         navigateToLoginButton.target = self
         navigateToLoginButton.action = #selector(navigateToLoginButtonPressed)
         navigationItem.rightBarButtonItem = navigateToLoginButton
@@ -90,7 +91,7 @@ final class AuthenticationViewController: UIViewController, UITextFieldDelegate,
         viewModel?.navigateToLoginButtonPressed()
     }
     
-    func setTitle(title: String, sender: AuthenticationViewModel) {
+    func setVCTitle(title: String) {
         self.title = title
     }
 

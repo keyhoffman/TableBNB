@@ -8,21 +8,24 @@
 
 import Foundation
 
+protocol ErrorDelegate {
+    func anErrorHasOccured(errorMessage: String)
+}
+
 // MARK: - AuthenticationViewModelCoordinatorDelegate
 
 protocol AuthenticationViewModelCoordinatorDelegate: class {
-    func userHasBeenAuthenticated(user user: User, sender: AuthenticationViewModel)
-    func navigateToLoginButtonPressed(sender: AuthenticationViewModel)
+    func userHasBeenAuthenticated(user user: User)
+    func navigateToLoginButtonPressed()
 }
 
 // MARK: - AuthenticationViewModelViewDelegate
 
-protocol AuthenticationViewModelViewDelegate: class {
-    func anErrorHasOccured(errorMessage: String, sender: AuthenticationViewModel)
-    func emailIsValid(sender: AuthenticationViewModel)
-    func passwordIsValid(sender: AuthenticationViewModel)
-    func setLoginNavigationItem(sender: AuthenticationViewModel)
-    func setTitle(title: String, sender: AuthenticationViewModel)
+protocol AuthenticationViewModelViewDelegate: class, ErrorDelegate {
+    func emailIsValid()
+    func passwordIsValid()
+    func setLoginNavigationItem()
+    func setVCTitle(title: String)
 }
 
 // MARK: - AuthenticationViewModelProtocol
@@ -41,9 +44,9 @@ protocol AuthenticationViewModelProtocol: class, Dumpable {
     var passwordIsValid: Bool { get set }
     var usernameIsValid: Bool { get set }
     
-    weak var model: AuthenticationModelProtocol? { get }
+    weak var model: AuthenticationModelProtocol? { get set }
     weak var viewDelegate: AuthenticationViewModelViewDelegate? { get set }
-    weak var coordinatorDelegate: AuthenticationViewModelCoordinatorDelegate? { get }
+    weak var coordinatorDelegate: AuthenticationViewModelCoordinatorDelegate? { get set }
     
     func navigateToLoginButtonPressed()
     
@@ -56,33 +59,33 @@ final class AuthenticationViewModel: AuthenticationViewModelProtocol {
     
     // MARK: - User Input Declarations
     
-    var email: String = String.emptyString() {
+    var email: String = .emptyString() {
         didSet {
             emailIsValid = validateEmailFormat(email)
-            if emailIsValid  { viewDelegate?.emailIsValid(self) }
-            if !emailIsValid { viewDelegate?.anErrorHasOccured("Invalid email format", sender: self) } // TODO: Move string literal elsewhere }
+            if emailIsValid  { viewDelegate?.emailIsValid() }
+            if !emailIsValid { viewDelegate?.anErrorHasOccured("Invalid email format") } // TODO: Move string literal elsewhere }
         }
     }
     
-    var password: String = String.emptyString() {
+    var password: String = .emptyString() {
         didSet {
             passwordIsValid = validatePasswordFormat(password)
             if passwordIsValid {
-                if isSigningUp  { viewDelegate?.passwordIsValid(self) }
+                if isSigningUp  { viewDelegate?.passwordIsValid() }
                 if !isSigningUp { submitAuthenticationRequest() }
             }
-            if !passwordIsValid { viewDelegate?.anErrorHasOccured("Invalid password format", sender: self) } // TODO: Move string literal elsewhere
+            if !passwordIsValid { viewDelegate?.anErrorHasOccured("Invalid password format") } // TODO: Move string literal elsewhere
         }
     }
     
-    var username: String = String.emptyString() {
+    var username: String = .emptyString() {
         didSet {
             usernameIsValid = validateUsernameFormat(username)
             if usernameIsValid {
                 if isSigningUp  { submitAuthenticationRequest() }
-                if !isSigningUp { viewDelegate?.anErrorHasOccured("This isnt possible", sender: self) } // TODO: Move string literal elsewhere }
+                if !isSigningUp { viewDelegate?.anErrorHasOccured("This isnt possible") } // TODO: Move string literal elsewhere }
             }
-            if !usernameIsValid { viewDelegate?.anErrorHasOccured("Invalid username format", sender: self) } // TODO: Move string literal elsewhere
+            if !usernameIsValid { viewDelegate?.anErrorHasOccured("Invalid username format") } // TODO: Move string literal elsewhere
         }
     }
     
@@ -110,9 +113,9 @@ final class AuthenticationViewModel: AuthenticationViewModelProtocol {
     weak var viewDelegate: AuthenticationViewModelViewDelegate? {
         didSet {
             switch isSigningUp {
-            case false: viewDelegate?.setTitle(AuthViewControllerStyleSheet.LoginTitle, sender: self)
-            case true:  viewDelegate?.setTitle(AuthViewControllerStyleSheet.SignUpTitle, sender: self)
-                        viewDelegate?.setLoginNavigationItem(self)
+            case false: viewDelegate?.setVCTitle(AuthViewControllerStyleSheet.LoginTitle)
+            case true:  viewDelegate?.setVCTitle(AuthViewControllerStyleSheet.SignUpTitle)
+                        viewDelegate?.setLoginNavigationItem()
             }
         }
     }
@@ -128,25 +131,25 @@ final class AuthenticationViewModel: AuthenticationViewModelProtocol {
     // MARK: - Navigation Methods
     
     func navigateToLoginButtonPressed() {
-        coordinatorDelegate?.navigateToLoginButtonPressed(self)
+        coordinatorDelegate?.navigateToLoginButtonPressed()
     }
     
     // MARK: - Authentication Submission Methods
     
     private func submitAuthenticationRequest() {
         guard let model = model where canSubmitAuthenticationRequest else {
-            viewDelegate?.anErrorHasOccured("Invalid Authentication Request", sender: self) // TODO: Move string literal elsewhere
+            viewDelegate?.anErrorHasOccured("Invalid Authentication Request") // TODO: Move string literal elsewhere
             return
         }
         
-        if isSigningUp  { model.signUp(email: email, password: password, username: username) { self.handleAuthentication(withResult: $0) } }
-        if !isSigningUp { model.login(email: email, password: password)                      { self.handleAuthentication(withResult: $0) } }
+        if isSigningUp  { model.signUp(email: email, password: password, username: username) { self.handleAuthenticationResult($0) } }
+        if !isSigningUp { model.login(email: email, password: password)                      { self.handleAuthenticationResult($0) } }
     }
     
-    private func handleAuthentication(withResult result: Result<User>) {
+    private func handleAuthenticationResult(result: Result<User>) {
         switch result {
-        case .Failure(let error): self.viewDelegate?.anErrorHasOccured(error._domain, sender: self)
-        case .Success(let user):  self.coordinatorDelegate?.userHasBeenAuthenticated(user: user, sender: self)
+        case .Failure(let error): self.viewDelegate?.anErrorHasOccured(error._domain)
+        case .Success(let user):  self.coordinatorDelegate?.userHasBeenAuthenticated(user: user)
         }
     }
     

@@ -11,5 +11,6 @@ import Foundation
 // MARK: - Configurable Protocol
 
 protocol Configurable {
-    func configure(withItem item: Any)
+    associatedtype DataType: Any
+    func configure(withItem item: DataType)
 }

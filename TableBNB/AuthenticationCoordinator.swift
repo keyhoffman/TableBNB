@@ -13,8 +13,8 @@ import Firebase
 // MARK: - AuthenticationCoordinatorDelegate Protocol
 
 protocol AuthenticationCoordinatorDelegate: class {
-    func userHasBeenAuthenticated(user user: User, sender: AuthenticationCoordinator)
-    func userHasBeenLoggedOut(loggedOutUser user: User, sender: AuthenticationCoordinator)
+    func userHasBeenAuthenticated(user user: User)
+    func userHasBeenLoggedOut(loggedOutUser user: User)
 }
 
 // MARK: - AuthenticationChecker Protocol
@@ -53,13 +53,13 @@ final class AuthenticationCoordinator: SubCoordinator, AuthenticationChecker, Au
     
     // MARK: - ViewModel Declarations
     
-    private let signUpViewModel = AuthenticationViewModel(isSigningUp: true)
-    private let loginViewModel  = AuthenticationViewModel(isSigningUp: false)
+    private let signUpViewModel: AuthenticationViewModelProtocol
+    private let loginViewModel:  AuthenticationViewModelProtocol
     
     // MARK: - Model Declarations
     
-    private let signUpModel = AuthenticationModel()
-    private let loginModel  = AuthenticationModel()
+    private let signUpModel: AuthenticationModelProtocol
+    private let loginModel:  AuthenticationModelProtocol
     
     // MARK: - AuthenticationCoordinator Initializer
     
@@ -68,6 +68,12 @@ final class AuthenticationCoordinator: SubCoordinator, AuthenticationChecker, Au
         
         signUpViewController = AuthenticationViewController()
         loginViewController  = AuthenticationViewController()
+        
+        signUpViewModel = AuthenticationViewModel(isSigningUp: true)
+        loginViewModel  = AuthenticationViewModel(isSigningUp: false)
+        
+        signUpModel = AuthenticationModel()
+        loginModel  = AuthenticationModel()
         
         signUpViewController.viewModel = signUpViewModel
         loginViewController.viewModel  = loginViewModel
@@ -83,7 +89,7 @@ final class AuthenticationCoordinator: SubCoordinator, AuthenticationChecker, Au
     // MARK: - SubCoordinator Required Methods
     
     func start() {
-        if let user = checkCurrentUser() { coordinatorDelegate?.userHasBeenAuthenticated(user: user, sender: self) }
+        if let user = checkCurrentUser() { coordinatorDelegate?.userHasBeenAuthenticated(user: user) }
         else {
             window.rootViewController = rootViewController
             window.makeKeyAndVisible()
@@ -93,11 +99,11 @@ final class AuthenticationCoordinator: SubCoordinator, AuthenticationChecker, Au
     
     // MARK: - AuthenticationViewModelCoordinatorDelegate Required Methods
     
-    func userHasBeenAuthenticated(user user: User, sender: AuthenticationViewModel) {
-        coordinatorDelegate?.userHasBeenAuthenticated(user: user, sender: self)
+    func userHasBeenAuthenticated(user user: User) {
+        coordinatorDelegate?.userHasBeenAuthenticated(user: user)
     }
     
-    func navigateToLoginButtonPressed(sender: AuthenticationViewModel) {
+    func navigateToLoginButtonPressed() {
         rootViewController.pushViewController(loginViewController, animated: true)
     }
     

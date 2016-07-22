@@ -11,7 +11,8 @@ import UIKit
 
 // MARK: - TableViewController
 
-class TableViewController<T: FBSendable, Cell: UITableViewCell where Cell: Configurable>: UITableViewController {
+class TableViewController<Cell: UITableViewCell where Cell: Configurable>: UITableViewController {
+    typealias DataType = Cell.DataType
     
     // MARK: - Cell Identifier Declaration
     
@@ -19,11 +20,11 @@ class TableViewController<T: FBSendable, Cell: UITableViewCell where Cell: Confi
     
     // MARK: - Data Declaration
     
-    var data: [T] = [] {
+    var data: [DataType] = [] {
         didSet {
             tableView.reloadData()
             if tableView.numberOfRowsInSection(0) > 0 {
-                tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0,inSection: 0), atScrollPosition: .Top, animated: true)
+                tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
             }
         }
     }
@@ -38,7 +39,7 @@ class TableViewController<T: FBSendable, Cell: UITableViewCell where Cell: Confi
         super.viewDidLoad()
         tableView.registerClass(Cell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 60
+        tableView.estimatedRowHeight = 60 // TODO: Move to stylesheet
     }
     
     // MARK: - TableViewDataSource Required Methods
