@@ -14,7 +14,7 @@ import UIKit
 // MARK: - Color
 
 enum Color {
-    case White, Cyan, LightGray, Blue, Red
+    case White, Cyan, LightGray, Blue, Red, Black
     
     var color: UIColor {
         switch self {
@@ -23,6 +23,7 @@ enum Color {
         case LightGray: return .lightGrayColor()
         case Blue:      return .blueColor()
         case Red:       return .redColor()
+        case Black:    return .blackColor()
         }
     }
 }

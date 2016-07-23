@@ -10,8 +10,10 @@ import Foundation
 import UIKit
 
 enum BrowseMealsStyleSheet: ViewPreparer {
-    
-    static func prepare(subject: BrowseMealsTableViewController) {}
-    
-    static var title: String { return "Browse Meals" }
+
+    static func prepare(subject: BrowseMealsTableViewController) {
+        subject.title = "Browse Meals"
+        subject.tableView.allowsSelection = false
+        subject.tableView.rowHeight = 300
+    }
 }

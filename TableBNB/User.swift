@@ -22,7 +22,6 @@ extension User {
     static let Path         = "users/"
     static let NeedsAutoKey = false
     static let FBSubKeys    = ["username", "email"]
-    static let Resource_    = Resource(parse: User.Create)
 }
 
 // MARK: - User "createNew" Initializer Extension

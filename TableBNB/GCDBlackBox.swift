@@ -8,7 +8,9 @@
 
 import Foundation
 
-func performUpdatesOnMain(updates: Void -> Void) {
+// TODO: Put in a protocol somewhere to avoid clogging global namespace
+
+func performUpdatesOnMainThread(updates: Void -> Void) {
     dispatch_async(dispatch_get_main_queue()) {
         updates()
     }

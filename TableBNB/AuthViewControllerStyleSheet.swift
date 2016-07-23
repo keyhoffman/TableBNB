@@ -8,13 +8,48 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
 // MARK: - AuthViewControllerStyleSheet
 
 enum AuthViewControllerStyleSheet: ViewPreparer {
     
-    // TODO: Possibly add this???
-    static func prepare(subject: AuthenticationViewController) {}
+    static func prepare(subject: AuthenticationViewController) {
+        subject.view.backgroundColor = AuthViewControllerStyleSheet.BackgroundColor
+        
+        subject.view.addSubview(subject.emailTextField)
+        subject.view.addSubview(subject.passwordTextField)
+        subject.view.addSubview(subject.usernameTextField)
+        subject.view.addSubview(subject.errorLabel)
+        
+        subject.emailTextField.snp_makeConstraints { make in
+            make.centerX.equalTo(subject.view.snp_centerX)
+            make.width.equalTo(subject.view).multipliedBy(AuthViewControllerStyleSheet.TextField.Frame.WidthToViewWidthFactor.value)
+            make.height.equalTo(subject.view).multipliedBy(AuthViewControllerStyleSheet.TextField.Frame.HeightToViewHeightFactor.value)
+            make.top.equalTo(subject.view).offset(subject.view.bounds.height * AuthViewControllerStyleSheet.TextField.Frame.TopToViewTopFactor.value)
+        }
+        
+        subject.passwordTextField.snp_makeConstraints { make in
+            make.width.equalTo(subject.emailTextField)
+            make.centerX.equalTo(subject.emailTextField)
+            make.top.equalTo(subject.emailTextField.snp_bottom)
+            make.height.equalTo(subject.emailTextField)
+        }
+        
+        subject.usernameTextField.snp_makeConstraints { make in
+            make.width.equalTo(subject.emailTextField)
+            make.centerX.equalTo(subject.emailTextField)
+            make.top.equalTo(subject.passwordTextField.snp_bottom)
+            make.height.equalTo(subject.emailTextField)
+        }
+        
+        subject.errorLabel.snp_makeConstraints { make in
+            make.centerX.width.equalTo(subject.emailTextField)
+            make.bottom.equalTo(subject.emailTextField.snp_top).offset(AuthViewControllerStyleSheet.Label.Frame.BottomToEmailTextFieldToOffset.value)
+            make.height.equalTo(AuthViewControllerStyleSheet.Label.Frame.Height.value)
+        }
+
+    }
     
     static var BackgroundColor: UIColor { return Color.Red.color }
     

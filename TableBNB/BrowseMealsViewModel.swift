@@ -17,16 +17,12 @@ protocol BrowseMealsViewModelCoordinatorDelegate: class {
 // MARK: - BrowseMealsViewModelViewDelegate
 
 protocol BrowseMealsViewModelViewDelegate: class, ErrorDelegate {
-    
+    func appendMeal(meal: Meal)
 }
 
-// MARK: - BrowseMealsViewModelProtocol
+// MARK: - BrowvarealsViewModelProtocol
 
 protocol BrowseMealsViewModelProtocol: class {
-    
-    
-    var resource: Resource<Meal> { get }
-    
     weak var viewDelegate: BrowseMealsViewModelViewDelegate?               { get set }
     weak var coordinatorDelegate: BrowseMealsViewModelCoordinatorDelegate? { get set }
 }
@@ -35,29 +31,20 @@ protocol BrowseMealsViewModelProtocol: class {
 
 class BrowseMealsViewModel: BrowseMealsViewModelProtocol {
     
-    let resource = Meal.Resource_
     
-    var meal: Meal?
-    
-    weak var viewDelegate: BrowseMealsViewModelViewDelegate?
+    var meal: Meal? = nil
+
     weak var coordinatorDelegate: BrowseMealsViewModelCoordinatorDelegate?
+    weak var viewDelegate: BrowseMealsViewModelViewDelegate? { didSet { startDatabaseLoad() } }
     
-    func startLoad() {
-        resource.loadChildAdded { result in
+    
+    private func startDatabaseLoad() {
+        Meal.loadChildAdded { result in
             switch result {
             case .Failure(let error): self.viewDelegate?.anErrorHasOccured(error._domain) // TODO: fix error handling
             case .Success(let meal):  self.meal = meal
+                                      self.viewDelegate?.appendMeal(meal)
             }
         }
     }
-    
-    func imageLoad() {
-        resource.loadImage { result in
-            switch result {
-            case .Failure(let error): self.viewDelegate?.anErrorHasOccured(error._domain) // TODO: fix error handling
-            case .Success(let Image):  Image.dump_()
-            }
-        }
-    }
-    
 }

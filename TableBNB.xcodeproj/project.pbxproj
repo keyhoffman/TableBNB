@@ -49,12 +49,6 @@
 		034D8DE41D41A295001A6499 /* BrowseMealsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DE31D41A295001A6499 /* BrowseMealsViewModel.swift */; };
 		034D8DE51D41A295001A6499 /* BrowseMealsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DE31D41A295001A6499 /* BrowseMealsViewModel.swift */; };
 		034D8DE61D41A295001A6499 /* BrowseMealsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DE31D41A295001A6499 /* BrowseMealsViewModel.swift */; };
-		034D8DE81D41AB07001A6499 /* FBObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DE71D41AB07001A6499 /* FBObservable.swift */; };
-		034D8DE91D41AB07001A6499 /* FBObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DE71D41AB07001A6499 /* FBObservable.swift */; };
-		034D8DEA1D41AB07001A6499 /* FBObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DE71D41AB07001A6499 /* FBObservable.swift */; };
-		034D8DEC1D41AB56001A6499 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DEB1D41AB56001A6499 /* Resource.swift */; };
-		034D8DED1D41AB56001A6499 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DEB1D41AB56001A6499 /* Resource.swift */; };
-		034D8DEE1D41AB56001A6499 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DEB1D41AB56001A6499 /* Resource.swift */; };
 		034D8DF21D41D18D001A6499 /* FBStorageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DF11D41D18D001A6499 /* FBStorageType.swift */; };
 		034D8DF31D41D18D001A6499 /* FBStorageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DF11D41D18D001A6499 /* FBStorageType.swift */; };
 		034D8DF41D41D18D001A6499 /* FBStorageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DF11D41D18D001A6499 /* FBStorageType.swift */; };
@@ -155,8 +149,6 @@
 		034D8DDB1D419BC7001A6499 /* BrowseMealsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseMealsTableViewController.swift; sourceTree = "<group>"; };
 		034D8DDF1D419C9A001A6499 /* BrowseMealsTableViewControllerStyleSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseMealsTableViewControllerStyleSheet.swift; sourceTree = "<group>"; };
 		034D8DE31D41A295001A6499 /* BrowseMealsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseMealsViewModel.swift; sourceTree = "<group>"; };
-		034D8DE71D41AB07001A6499 /* FBObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBObservable.swift; sourceTree = "<group>"; };
-		034D8DEB1D41AB56001A6499 /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		034D8DF11D41D18D001A6499 /* FBStorageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBStorageType.swift; sourceTree = "<group>"; };
 		034D8DF51D41F6A3001A6499 /* MealTableViewCellStyleSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealTableViewCellStyleSheet.swift; sourceTree = "<group>"; };
 		034D8DFA1D41F964001A6499 /* ViewPreparer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPreparer.swift; sourceTree = "<group>"; };
@@ -315,8 +307,8 @@
 			children = (
 				0352AA521D3EF17A00201A1F /* Utility */,
 				0352AA701D3F01CE00201A1F /* Views */,
-				0352AA941D3F48B400201A1F /* ViewModels */,
 				0352AA6F1D3F01C300201A1F /* ViewControllers */,
+				0352AA941D3F48B400201A1F /* ViewModels */,
 				0352AA551D3EF1B800201A1F /* Model */,
 				0352AA511D3EF16800201A1F /* Coordinators */,
 				0352AA501D3EF16000201A1F /* Support */,
@@ -405,7 +397,6 @@
 				0352AA891D3F13B000201A1F /* Protocols */,
 				0352AA6B1D3EF85E00201A1F /* User.swift */,
 				034D8DD31D418541001A6499 /* Meal.swift */,
-				034D8DEB1D41AB56001A6499 /* Resource.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -433,7 +424,6 @@
 			children = (
 				0352AA8A1D3F13C100201A1F /* FBType.swift */,
 				0352AA8E1D3F13E000201A1F /* FBSendable.swift */,
-				034D8DE71D41AB07001A6499 /* FBObservable.swift */,
 				034D8DF11D41D18D001A6499 /* FBStorageType.swift */,
 			);
 			name = Protocols;
@@ -764,7 +754,6 @@
 				034D8DC41D416E1E001A6499 /* UserProfileCoordinator.swift in Sources */,
 				0352AA681D3EF79800201A1F /* AuthenticationCoordinator.swift in Sources */,
 				034D8DAF1D415EC8001A6499 /* AuthenticationModel.swift in Sources */,
-				034D8DEC1D41AB56001A6499 /* Resource.swift in Sources */,
 				0352AA641D3EF6D200201A1F /* Dumpable.swift in Sources */,
 				034D8DE41D41A295001A6499 /* BrowseMealsViewModel.swift in Sources */,
 				034D8DD41D418541001A6499 /* Meal.swift in Sources */,
@@ -789,7 +778,6 @@
 				034D8DAA1D415DA8001A6499 /* String.swift in Sources */,
 				0352AA9E1D40466E00201A1F /* GCDBlackBox.swift in Sources */,
 				0352AA601D3EF4F900201A1F /* ApplicationCoordinator.swift in Sources */,
-				034D8DE81D41AB07001A6499 /* FBObservable.swift in Sources */,
 				034D8DFB1D41F964001A6499 /* ViewPreparer.swift in Sources */,
 				0352AAA71D40A63C00201A1F /* Dictionary.swift in Sources */,
 				0352AA6C1D3EF85E00201A1F /* User.swift in Sources */,
@@ -823,7 +811,6 @@
 				034D8DC91D4171F4001A6499 /* TabBarStyleSheet.swift in Sources */,
 				034D8DD91D41865A001A6499 /* MealTableViewCell.swift in Sources */,
 				034D8DC11D416E08001A6499 /* AddMealCoordinator.swift in Sources */,
-				034D8DED1D41AB56001A6499 /* Resource.swift in Sources */,
 				034D8DB41D4164A0001A6499 /* TabBarCoordinator.swift in Sources */,
 				0352AA871D3F111300201A1F /* Result.swift in Sources */,
 				0352AA381D3EF12E00201A1F /* TableBNBTests.swift in Sources */,
@@ -832,7 +819,6 @@
 				0352AA901D3F13E000201A1F /* FBSendable.swift in Sources */,
 				034D8DCD1D41822B001A6499 /* BaseTableViewController.swift in Sources */,
 				034D8DDD1D419BC7001A6499 /* BrowseMealsTableViewController.swift in Sources */,
-				034D8DE91D41AB07001A6499 /* FBObservable.swift in Sources */,
 				034D8DC51D416E1E001A6499 /* UserProfileCoordinator.swift in Sources */,
 				0352AA8C1D3F13C100201A1F /* FBType.swift in Sources */,
 				034D8DF31D41D18D001A6499 /* FBStorageType.swift in Sources */,
@@ -865,7 +851,6 @@
 				034D8DCA1D4171F4001A6499 /* TabBarStyleSheet.swift in Sources */,
 				034D8DDA1D41865A001A6499 /* MealTableViewCell.swift in Sources */,
 				034D8DC21D416E08001A6499 /* AddMealCoordinator.swift in Sources */,
-				034D8DEE1D41AB56001A6499 /* Resource.swift in Sources */,
 				034D8DB51D4164A0001A6499 /* TabBarCoordinator.swift in Sources */,
 				0352AA881D3F111300201A1F /* Result.swift in Sources */,
 				0352AA431D3EF12E00201A1F /* TableBNBUITests.swift in Sources */,
@@ -874,7 +859,6 @@
 				0352AA911D3F13E000201A1F /* FBSendable.swift in Sources */,
 				034D8DCE1D41822B001A6499 /* BaseTableViewController.swift in Sources */,
 				034D8DDE1D419BC7001A6499 /* BrowseMealsTableViewController.swift in Sources */,
-				034D8DEA1D41AB07001A6499 /* FBObservable.swift in Sources */,
 				034D8DC61D416E1E001A6499 /* UserProfileCoordinator.swift in Sources */,
 				0352AA8D1D3F13C100201A1F /* FBType.swift in Sources */,
 				034D8DF41D41D18D001A6499 /* FBStorageType.swift in Sources */,

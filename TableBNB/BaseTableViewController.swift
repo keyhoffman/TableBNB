@@ -23,9 +23,9 @@ class TableViewController<Cell: UITableViewCell where Cell: Configurable>: UITab
     var data: [DataType] = [] {
         didSet {
             tableView.reloadData()
-            if tableView.numberOfRowsInSection(0) > 0 {
-                tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
-            }
+//            if tableView.numberOfRowsInSection(0) > 0 {
+//                tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
+//            }
         }
     }
     
@@ -38,8 +38,6 @@ class TableViewController<Cell: UITableViewCell where Cell: Configurable>: UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.registerClass(Cell.self, forCellReuseIdentifier: cellIdentifier)
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 60 // TODO: Move to stylesheet
     }
     
     // MARK: - TableViewDataSource Required Methods

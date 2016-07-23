@@ -21,11 +21,20 @@ final class BrowseMealsTableViewController: TableViewController<MealTableViewCel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = BrowseMealsStyleSheet.title
+        BrowseMealsStyleSheet.prepare(self)
+    }
+    
+    // MARK: - BrowseMealsViewModelViewDelegate Required Methods
+    
+    func appendMeal(meal: Meal) {
+        self.data.append(meal)
     }
     
     func anErrorHasOccured(errorMessage: String) {
         title = title ?? String.emptyString() + errorMessage
+    }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
     }
 }

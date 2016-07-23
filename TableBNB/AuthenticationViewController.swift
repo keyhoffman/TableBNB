@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SnapKit
 
 // MARK: - AuthenticationViewController
 
@@ -25,13 +24,13 @@ final class AuthenticationViewController: UIViewController, UITextFieldDelegate,
     
     // MARK: - TextField Declarations
     
-    private let emailTextField    = AuthViewControllerStyleSheet.TextField.Email.textField
-    private let passwordTextField = AuthViewControllerStyleSheet.TextField.Password.textField
-    private let usernameTextField = AuthViewControllerStyleSheet.TextField.Username.textField
+    let emailTextField    = AuthViewControllerStyleSheet.TextField.Email.textField
+    let passwordTextField = AuthViewControllerStyleSheet.TextField.Password.textField
+    let usernameTextField = AuthViewControllerStyleSheet.TextField.Username.textField
     
     // MARK: - ErrorLabel Declaration
     
-    private let errorLabel: UILabel = AuthViewControllerStyleSheet.Label.Error.label
+    let errorLabel: UILabel = AuthViewControllerStyleSheet.Label.Error.label
     
     // MARK: - ViewController Lifecycle
     // TODO:   Add A Prepare Method!!!!
@@ -39,7 +38,7 @@ final class AuthenticationViewController: UIViewController, UITextFieldDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         setTextFieldsAndErrorLabel()
-        view.backgroundColor = AuthViewControllerStyleSheet.BackgroundColor
+        AuthViewControllerStyleSheet.prepare(self)
     }
 
     // MARK: - TextField Delegate Methods
@@ -101,39 +100,6 @@ final class AuthenticationViewController: UIViewController, UITextFieldDelegate,
         usernameTextField.delegate = self
         
         emailTextField.becomeFirstResponder()
-        
-        view.addSubview(emailTextField)
-        view.addSubview(passwordTextField)
-        view.addSubview(usernameTextField)
-        view.addSubview(errorLabel)
-        
-        emailTextField.snp_makeConstraints { make in
-            make.centerX.equalTo(view.snp_centerX)
-            make.width.equalTo(view).multipliedBy(AuthViewControllerStyleSheet.TextField.Frame.WidthToViewWidthFactor.value)
-            make.height.equalTo(view).multipliedBy(AuthViewControllerStyleSheet.TextField.Frame.HeightToViewHeightFactor.value)
-            make.top.equalTo(view).offset(view.bounds.height * AuthViewControllerStyleSheet.TextField.Frame.TopToViewTopFactor.value)
-        }
-        
-        passwordTextField.snp_makeConstraints { make in
-            make.width.equalTo(emailTextField)
-            make.centerX.equalTo(emailTextField)
-            make.top.equalTo(emailTextField.snp_bottom)
-            make.height.equalTo(emailTextField)
-        }
-        
-        usernameTextField.snp_makeConstraints { make in
-            make.width.equalTo(emailTextField)
-            make.centerX.equalTo(emailTextField)
-            make.top.equalTo(passwordTextField.snp_bottom)
-            make.height.equalTo(emailTextField)
-        }
-        
-        errorLabel.snp_makeConstraints { make in
-            make.centerX.width.equalTo(emailTextField)
-            make.bottom.equalTo(emailTextField.snp_top).offset(AuthViewControllerStyleSheet.Label.Frame.BottomToEmailTextFieldToOffset.value)
-            make.height.equalTo(AuthViewControllerStyleSheet.Label.Frame.Height.value)
-        }
-
     }
     
 }

@@ -38,7 +38,7 @@ final class ApplicationCoordinator: Coordinator, AuthenticationCoordinatorDelega
     // MARK: - Coordinator Required Methods 
     
     func start() {
-        try! FIRAuth.auth()?.signOut() // TODO: Delete!
+//        try! FIRAuth.auth()?.signOut() // TODO: Delete!
         authenticationCoordinator.start()
     }
     

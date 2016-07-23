@@ -8,18 +8,25 @@
 
 import UIKit
 
-//MARK: - MealTableViewCell
+// MARK: - MealTableViewCell
 
 final class MealTableViewCell: UITableViewCell, Configurable {
+    
+    let mealNamelabel  = UILabel()
+    let mealCostLabel  = UILabel()
+    let mealFeedsLabel = UILabel()
+    
+    let mealImageView = UIImageView()
+    
+    let spinner = UIActivityIndicatorView()
 
-    //MARK: - MealTableViewCell Initializer
+    // MARK: - MealTableViewCell Initializer
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        // TODO: Move all view logic to here
-        
+        spinner.startAnimating()
         MealCellStyleSheet.prepare(self)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -27,33 +34,22 @@ final class MealTableViewCell: UITableViewCell, Configurable {
     }
     
     // MARK: - Configurable Required Methods
-    // TODO:   Move all data logic to here
+    
     func configure(withItem item: Meal) {
-        
+        defer { setNeedsLayout() }
+        mealNamelabel.text  = item.name
+        mealCostLabel.text  = "$\(item.pricePerPerson)/Guest" // TODO: - This needs to be formatted in the viewmodel
+        mealFeedsLabel.text = "\(item.feeds) guests welcome"
+        item.loadImage { result in
+            performUpdatesOnMainThread {
+                switch result {
+                case .Failure(let error): self.mealNamelabel.text = error._domain
+                case .Success(let image): self.spinner.stopAnimating()
+                                          self.mealImageView.image = image
+                }
+            }
+        }
     }
     
 }
 
-//// MARK: - MealTableViewCell Extension
-//
-//struct ViewData {
-//    let name:           String
-//    let pricePerPerson: Double
-//    let feeds:          Int
-//}
-//
-//var viewData: ViewData? {
-//didSet {
-//    textLabel?.text       = viewData?.name
-//    detailTextLabel?.text = String(viewData?.pricePerPerson)
-//}
-//}
-//
-//
-//extension MealTableViewCell.ViewData {
-//    init(meal: Meal) {
-//        self.name           = meal.name
-//        self.pricePerPerson = meal.pricePerPerson
-//        self.feeds          = meal.feeds
-//    }
-//}

@@ -9,12 +9,41 @@
 import Foundation
 import Firebase
 
+// MARK: - FBStorageType Protocol
+
 protocol FBStorageType {
-    static var StoragePath: String { get set }
+    var storagePath: String { get }
 }
 
+// MARK: - FBStorageType Protocol Extension
+
 extension FBStorageType {
-    private static var Bucket: String { return "gs://tablebnb.appspot.com" }
-    static var StorageRef: FIRStorageReference { return FIRStorage.storage().referenceForURL(Bucket).child(StoragePath) }
-    static var MaxSize: Int64 { return 1 * 1024 * 1024 }
+    private var bucket: String { return "gs://tablebnb.appspot.com" }
+    var storageRef: FIRStorageReference { return FIRStorage.storage().referenceForURL(bucket).child(storagePath) }
+    var maxSize: Int64 { return 1 * 1024 * 1024 }
+}
+
+extension FBSendable where Self: FBStorageType {
+    private var dataError: NSError {
+        return NSError(domain: "TableBNB", code: 3, userInfo: [NSLocalizedDescriptionKey: "Invalid storage loading data for type \(Self.self)"])
+    }
+    
+    private var imageError: NSError {
+        return NSError(domain: "TableBNB", code: 3, userInfo: [NSLocalizedDescriptionKey: "Could not create image for type \(Self.self)"])
+    }
+    
+    func loadImage(withResult: Result<UIImage> -> Void) {
+        storageRef.dataWithMaxSize(maxSize) { data, error in
+            if let error = error { print("ERROR - \(error)"); withResult(.Failure(error)) }
+            guard let data = data else {
+                withResult(.Failure(self.dataError))
+                return
+            }
+            guard let image = UIImage(data: data) else {
+                withResult(.Failure(self.imageError))
+                return
+            }
+            withResult(.Success(image))
+        }
+    }
 }
