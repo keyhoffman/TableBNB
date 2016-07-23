@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 // MARK: - BrowseMealsViewModelCoordinatorDelegate
 
@@ -20,6 +21,10 @@ protocol BrowseMealsViewModelViewDelegate: class, ErrorDelegate {
     func appendMeal(meal: Meal)
 }
 
+protocol BrowseMealsViewModelCellDelegate: class {
+    func setMealImage(image: UIImage)
+}
+
 // MARK: - BrowvarealsViewModelProtocol
 
 protocol BrowseMealsViewModelProtocol: class {
@@ -29,21 +34,19 @@ protocol BrowseMealsViewModelProtocol: class {
 
 // MARK: - BrowseMealsViewModel
 
-class BrowseMealsViewModel: BrowseMealsViewModelProtocol {
-    
-    
-    var meal: Meal? = nil
+final class BrowseMealsViewModel: BrowseMealsViewModelProtocol {
 
     weak var coordinatorDelegate: BrowseMealsViewModelCoordinatorDelegate?
-    weak var viewDelegate: BrowseMealsViewModelViewDelegate? { didSet { startDatabaseLoad() } }
+    weak var viewDelegate: BrowseMealsViewModelViewDelegate? { didSet { beginLoading() } }
     
     
-    private func startDatabaseLoad() {
+    private func beginLoading() {
         Meal.loadChildAdded { result in
-            switch result {
-            case .Failure(let error): self.viewDelegate?.anErrorHasOccured(error._domain) // TODO: fix error handling
-            case .Success(let meal):  self.meal = meal
-                                      self.viewDelegate?.appendMeal(meal)
+            performUpdatesOnMainThread {
+                switch result {
+                case .Failure(let error): self.viewDelegate?.anErrorHasOccured(error._domain) // TODO: fix error handling
+                case .Success(let meal):  self.viewDelegate?.appendMeal(meal)
+                }
             }
         }
     }

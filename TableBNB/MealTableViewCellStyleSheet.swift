@@ -11,7 +11,7 @@ import UIKit
 import SnapKit
 
 enum MealCellStyleSheet: ViewPreparer {
-    case MealImage
+    case MealImage, CostLabel
     
     static func prepare(subject: MealTableViewCell) {
         subject.backgroundColor = Color.LightGray.color
@@ -40,7 +40,6 @@ enum MealCellStyleSheet: ViewPreparer {
         subject.addSubview(subject.mealCostLabel)
         subject.addSubview(subject.mealNamelabel)
         subject.addSubview(subject.mealFeedsLabel)
-
         
         subject.mealImageView.snp_makeConstraints { make in
             make.width.equalTo(subject.snp_width)
@@ -60,15 +59,30 @@ enum MealCellStyleSheet: ViewPreparer {
         
         subject.mealCostLabel.snp_makeConstraints { make in
             make.top.equalTo(subject.mealImageView.snp_top)
-            make.height.equalTo(subject.mealImageView.snp_height).multipliedBy(0.4)
+            make.height.equalTo(subject.mealImageView.snp_height).multipliedBy(self.CostLabel.heightToCellHeightFactor)
             make.left.equalTo(subject.snp_left)
-            make.width.equalTo(subject.snp_width).multipliedBy(0.3)
+            make.width.equalTo(subject.snp_width).multipliedBy(self.CostLabel.widthToCellWidthFactor)
+        }
+        
+        subject.mealFeedsLabel.snp_makeConstraints { make in
+            make.height.equalTo(subject.mealCostLabel.snp_height)
+            make.width.equalTo(subject.mealCostLabel.snp_width)
+            make.left.equalTo(subject.mealCostLabel.snp_left)
+            make.top.equalTo(subject.mealCostLabel.snp_bottom)
         }
     }
     
     private var heightToCellHeightFactor: CGFloat {
         switch self {
-        case .MealImage: return 0.75
+        case MealImage: return 0.75
+        case CostLabel: return 0.3
+        }
+    }
+    
+    private var widthToCellWidthFactor: CGFloat {
+        switch self {
+        case MealImage: return 1.0
+        case CostLabel: return 0.3
         }
     }
 }

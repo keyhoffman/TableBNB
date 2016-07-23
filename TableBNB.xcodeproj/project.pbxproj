@@ -365,7 +365,6 @@
 				0352AA851D3F111300201A1F /* Result.swift */,
 				0352AA931D3F1BB100201A1F /* Protocols */,
 				0352AA541D3EF1AA00201A1F /* Errors */,
-				0352AA531D3EF19900201A1F /* StyleSheets */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -414,6 +413,7 @@
 		0352AA701D3F01CE00201A1F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0352AA531D3EF19900201A1F /* StyleSheets */,
 				034D8DD71D41865A001A6499 /* MealTableViewCell.swift */,
 			);
 			name = Views;

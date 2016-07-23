@@ -19,9 +19,7 @@ protocol AuthenticationCoordinatorDelegate: class {
 
 // MARK: - AuthenticationChecker Protocol
 
-protocol AuthenticationChecker {
-    func checkCurrentUser() -> User?
-}
+protocol AuthenticationChecker {}
 
 // MARK: - AuthenticationChecker Protocol Extension
 

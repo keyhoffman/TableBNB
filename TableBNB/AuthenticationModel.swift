@@ -21,9 +21,11 @@ protocol AuthenticationModelProtocol: class {
 
 final class AuthenticationModel: AuthenticationModelProtocol {
     
+    typealias UserResult = Result<User> -> Void
+    
     // MARK: AuthenticationModelProtocol Required Methods
     
-    func login(email email: String, password: String, withResult: Result<User> -> Void) {
+    func login(email email: String, password: String, withResult: UserResult) {
         FIRAuth.auth()?.signInWithEmail(email, password: password) { user, error in
             if let error = error {
                 print(error.localizedDescription)
@@ -42,7 +44,7 @@ final class AuthenticationModel: AuthenticationModelProtocol {
         
     }
     
-    func signUp(email email: String, password: String, username: String, withResult: Result<User> -> Void) {
+    func signUp(email email: String, password: String, username: String, withResult: UserResult) {
         FIRAuth.auth()?.createUserWithEmail(email, password: password) { user, error in
             if let error = error {
                 print(error.localizedDescription)
@@ -64,10 +66,8 @@ final class AuthenticationModel: AuthenticationModelProtocol {
                 }
                 let logggedInUser = User(key: user.uid, username: username, email: email)
                 logggedInUser.sendToFB { result in
-                    switch result {
-                    case .Failure(let error): withResult(.Failure(error))
-                    case .Success(let user):  withResult(.Success(user))
-                    }
+                    withResult(result)
+                    return
                 }
                 return
             }
