@@ -13,7 +13,7 @@ import UIKit
 
 final class BrowseMealsTableViewController: TableViewController<MealTableViewCell>, BrowseMealsViewModelViewDelegate {
     
-    weak var viewModel: BrowseMealsViewModelProtocol? {
+    weak var viewModel: BrowseMealsViewModelType? {
         didSet { viewModel?.viewDelegate = self }
     }
     
@@ -28,6 +28,8 @@ final class BrowseMealsTableViewController: TableViewController<MealTableViewCel
     
     func appendMeal(meal: Meal) {
         self.data.append(meal)
+        print("MEAL SIZE")
+        print(sizeof(Meal))
     }
     
     func anErrorHasOccured(errorMessage: String) {

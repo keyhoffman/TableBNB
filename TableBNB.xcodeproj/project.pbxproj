@@ -58,6 +58,9 @@
 		034D8DFB1D41F964001A6499 /* ViewPreparer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DFA1D41F964001A6499 /* ViewPreparer.swift */; };
 		034D8DFC1D41F964001A6499 /* ViewPreparer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DFA1D41F964001A6499 /* ViewPreparer.swift */; };
 		034D8DFD1D41F964001A6499 /* ViewPreparer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DFA1D41F964001A6499 /* ViewPreparer.swift */; };
+		034D8E011D46BC16001A6499 /* ErrorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8E001D46BC16001A6499 /* ErrorDelegate.swift */; };
+		034D8E021D46BC16001A6499 /* ErrorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8E001D46BC16001A6499 /* ErrorDelegate.swift */; };
+		034D8E031D46BC16001A6499 /* ErrorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8E001D46BC16001A6499 /* ErrorDelegate.swift */; };
 		0352AA201D3EF12D00201A1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0352AA1F1D3EF12D00201A1F /* AppDelegate.swift */; };
 		0352AA281D3EF12D00201A1F /* TableBNB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0352AA261D3EF12D00201A1F /* TableBNB.xcdatamodeld */; };
 		0352AA2A1D3EF12D00201A1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0352AA291D3EF12D00201A1F /* Assets.xcassets */; };
@@ -152,6 +155,7 @@
 		034D8DF11D41D18D001A6499 /* FBStorageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBStorageType.swift; sourceTree = "<group>"; };
 		034D8DF51D41F6A3001A6499 /* MealTableViewCellStyleSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealTableViewCellStyleSheet.swift; sourceTree = "<group>"; };
 		034D8DFA1D41F964001A6499 /* ViewPreparer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPreparer.swift; sourceTree = "<group>"; };
+		034D8E001D46BC16001A6499 /* ErrorDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorDelegate.swift; sourceTree = "<group>"; };
 		0352AA1C1D3EF12D00201A1F /* TableBNB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableBNB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0352AA1F1D3EF12D00201A1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0352AA271D3EF12D00201A1F /* TableBNB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TableBNB.xcdatamodel; sourceTree = "<group>"; };
@@ -230,8 +234,8 @@
 		034D8DB61D416534001A6499 /* SubCoordinators */ = {
 			isa = PBXGroup;
 			children = (
-				034D8DB81D416C63001A6499 /* AuthenticationCoordinator */,
 				034D8DB91D416C73001A6499 /* TabBarCoordinator */,
+				034D8DB81D416C63001A6499 /* AuthenticationCoordinator */,
 			);
 			name = SubCoordinators;
 			sourceTree = "<group>";
@@ -385,6 +389,7 @@
 		0352AA541D3EF1AA00201A1F /* Errors */ = {
 			isa = PBXGroup;
 			children = (
+				034D8E001D46BC16001A6499 /* ErrorDelegate.swift */,
 			);
 			name = Errors;
 			sourceTree = "<group>";
@@ -763,6 +768,7 @@
 				0352AA761D3F02EA00201A1F /* AuthViewControllerStyleSheet.swift in Sources */,
 				034D8DD01D41825C001A6499 /* Configurable.swift in Sources */,
 				0352AA281D3EF12D00201A1F /* TableBNB.xcdatamodeld in Sources */,
+				034D8E011D46BC16001A6499 /* ErrorDelegate.swift in Sources */,
 				034D8DBC1D416DF3001A6499 /* BrowseMealsCoordinator.swift in Sources */,
 				0352AA7A1D3F030500201A1F /* General.swift in Sources */,
 				0352AA8B1D3F13C100201A1F /* FBType.swift in Sources */,
@@ -801,6 +807,7 @@
 				034D8DF71D41F6A3001A6499 /* MealTableViewCellStyleSheet.swift in Sources */,
 				0352AA5D1D3EF48300201A1F /* Coordinator.swift in Sources */,
 				0352AAA31D40A5ED00201A1F /* TextField.swift in Sources */,
+				034D8E021D46BC16001A6499 /* ErrorDelegate.swift in Sources */,
 				0352AA691D3EF79800201A1F /* AuthenticationCoordinator.swift in Sources */,
 				0352AA7B1D3F030500201A1F /* General.swift in Sources */,
 				034D8DFC1D41F964001A6499 /* ViewPreparer.swift in Sources */,
@@ -841,6 +848,7 @@
 				034D8DF81D41F6A3001A6499 /* MealTableViewCellStyleSheet.swift in Sources */,
 				0352AA5E1D3EF48300201A1F /* Coordinator.swift in Sources */,
 				0352AAA41D40A5ED00201A1F /* TextField.swift in Sources */,
+				034D8E031D46BC16001A6499 /* ErrorDelegate.swift in Sources */,
 				0352AA6A1D3EF79800201A1F /* AuthenticationCoordinator.swift in Sources */,
 				0352AA7C1D3F030500201A1F /* General.swift in Sources */,
 				034D8DFD1D41F964001A6499 /* ViewPreparer.swift in Sources */,

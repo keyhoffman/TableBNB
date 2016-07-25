@@ -21,6 +21,11 @@ extension Dumpable {
         dump(self)
     }
     
+    func dumpWithSize() {
+        dump_()
+        print("Size == \(sizeof(Self))")
+    }
+    
     func dump_(withContext context: String) {
         print("----- \(context) -----")
         dump_()

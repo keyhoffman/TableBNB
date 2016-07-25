@@ -45,6 +45,7 @@ final class ApplicationCoordinator: Coordinator, AuthenticationCoordinatorDelega
     // MARK: - AuthenticationCoordinatorDelegate Required Methods
     
     func userHasBeenAuthenticated(user user: User) {
+        user.dumpWithSize()
         tabBarCoordinator.start()
     }
     

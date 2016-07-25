@@ -21,20 +21,16 @@ protocol BrowseMealsViewModelViewDelegate: class, ErrorDelegate {
     func appendMeal(meal: Meal)
 }
 
-protocol BrowseMealsViewModelCellDelegate: class {
-    func setMealImage(image: UIImage)
-}
-
 // MARK: - BrowvarealsViewModelProtocol
 
-protocol BrowseMealsViewModelProtocol: class {
+protocol BrowseMealsViewModelType: class {
     weak var viewDelegate: BrowseMealsViewModelViewDelegate?               { get set }
     weak var coordinatorDelegate: BrowseMealsViewModelCoordinatorDelegate? { get set }
 }
 
 // MARK: - BrowseMealsViewModel
 
-final class BrowseMealsViewModel: BrowseMealsViewModelProtocol {
+final class BrowseMealsViewModel: BrowseMealsViewModelType {
 
     weak var coordinatorDelegate: BrowseMealsViewModelCoordinatorDelegate?
     weak var viewDelegate: BrowseMealsViewModelViewDelegate? { didSet { beginLoading() } }

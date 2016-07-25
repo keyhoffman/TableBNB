@@ -33,7 +33,7 @@ final class BrowseMealsCoordinator: SubCoordinator, BrowseMealsViewModelCoordina
     
     // MARK: - TableViewModel Declaration
     
-    private let browseMealsViewModel: BrowseMealsViewModelProtocol
+    private let browseMealsViewModel: BrowseMealsViewModelType
     
     // MARK: - TableModel Declaration
     

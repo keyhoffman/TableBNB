@@ -11,7 +11,7 @@ import Firebase
 
 // MARK: - AuthenticationModelProtocol
 
-protocol AuthenticationModelProtocol: class {
+protocol AuthenticationModelType: class {
     func login(email email: String, password: String, withResult: Result<User> -> Void)
     func signUp(email email: String, password: String, username: String, withResult: Result<User> -> Void)
 }
@@ -19,7 +19,7 @@ protocol AuthenticationModelProtocol: class {
 
 // MARK: - AuthenticationModel
 
-final class AuthenticationModel: AuthenticationModelProtocol {
+final class AuthenticationModel: AuthenticationModelType {
     
     typealias UserResult = Result<User> -> Void
     

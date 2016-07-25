@@ -51,13 +51,13 @@ final class AuthenticationCoordinator: SubCoordinator, AuthenticationChecker, Au
     
     // MARK: - ViewModel Declarations
     
-    private let signUpViewModel: AuthenticationViewModelProtocol
-    private let loginViewModel:  AuthenticationViewModelProtocol
+    private let signUpViewModel: AuthenticationViewModelType
+    private let loginViewModel:  AuthenticationViewModelType
     
     // MARK: - Model Declarations
     
-    private let signUpModel: AuthenticationModelProtocol
-    private let loginModel:  AuthenticationModelProtocol
+    private let signUpModel: AuthenticationModelType
+    private let loginModel:  AuthenticationModelType
     
     // MARK: - AuthenticationCoordinator Initializer
     

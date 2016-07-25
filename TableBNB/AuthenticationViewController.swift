@@ -14,7 +14,7 @@ final class AuthenticationViewController: UIViewController, UITextFieldDelegate,
     
     // MARK: - AuthenticationViewModelProtocol Declaration
     
-    weak var viewModel: AuthenticationViewModelProtocol? {
+    weak var viewModel: AuthenticationViewModelType? {
         didSet { viewModel?.viewDelegate = self }
     }
     

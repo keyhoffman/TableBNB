@@ -8,10 +8,6 @@
 
 import Foundation
 
-protocol ErrorDelegate {
-    func anErrorHasOccured(errorMessage: String)
-}
-
 // MARK: - AuthenticationViewModelCoordinatorDelegate
 
 protocol AuthenticationViewModelCoordinatorDelegate: class {
@@ -30,7 +26,7 @@ protocol AuthenticationViewModelViewDelegate: class, ErrorDelegate {
 
 // MARK: - AuthenticationViewModelProtocol
 
-protocol AuthenticationViewModelProtocol: class, Dumpable {
+protocol AuthenticationViewModelType: class, Dumpable {
     var isSigningUp: Bool { get }
     
     var email:    String { get set }
@@ -44,7 +40,7 @@ protocol AuthenticationViewModelProtocol: class, Dumpable {
     var passwordIsValid: Bool { get set }
     var usernameIsValid: Bool { get set }
     
-    weak var model: AuthenticationModelProtocol? { get set }
+    weak var model: AuthenticationModelType? { get set }
     weak var viewDelegate: AuthenticationViewModelViewDelegate? { get set }
     weak var coordinatorDelegate: AuthenticationViewModelCoordinatorDelegate? { get set }
     
@@ -55,7 +51,7 @@ protocol AuthenticationViewModelProtocol: class, Dumpable {
 
 // MARK: - AuthenticationViewModel
 
-final class AuthenticationViewModel: AuthenticationViewModelProtocol {
+final class AuthenticationViewModel: AuthenticationViewModelType {
     
     // MARK: - User Input Declarations
     
@@ -108,7 +104,7 @@ final class AuthenticationViewModel: AuthenticationViewModelProtocol {
     
     // MARK: - Delegate and Model Declarations
     
-    weak var model: AuthenticationModelProtocol?
+    weak var model: AuthenticationModelType?
     weak var coordinatorDelegate: AuthenticationViewModelCoordinatorDelegate?
     weak var viewDelegate: AuthenticationViewModelViewDelegate? {
         didSet {
