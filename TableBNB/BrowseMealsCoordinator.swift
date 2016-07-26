@@ -57,4 +57,33 @@ final class BrowseMealsCoordinator: SubCoordinator, BrowseMealsViewModelCoordina
     func start() {
         navigationController.pushViewController(browseMealsTableViewController, animated: false)
     }
+    
+    // MARK: - BrowseMealsViewModelCoordinatorDelegate Required Methodes
+    
+    func userDidSelectMeal(meal: Meal) {
+        meal.dump_(withContext: "userDidSelectMeal")
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

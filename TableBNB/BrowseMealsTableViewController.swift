@@ -13,6 +13,8 @@ import UIKit
 
 final class BrowseMealsTableViewController: TableViewController<MealTableViewCell>, BrowseMealsViewModelViewDelegate {
     
+    // MARK: - BrowseMealsViewModelType Declaration
+    
     weak var viewModel: BrowseMealsViewModelType? {
         didSet { viewModel?.viewDelegate = self }
     }
@@ -28,13 +30,13 @@ final class BrowseMealsTableViewController: TableViewController<MealTableViewCel
     
     func appendMeal(meal: Meal) {
         self.data.append(meal)
-        print("MEAL SIZE")
-        print(sizeof(Meal))
     }
     
     func anErrorHasOccured(errorMessage: String) {
         title = title ?? String.emptyString() + errorMessage
     }
+    
+    // MARK: - Optional TableViewDelegate Methods
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return false

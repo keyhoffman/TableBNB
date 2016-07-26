@@ -7,12 +7,11 @@
 //
 
 import Foundation
-import UIKit
 
 // MARK: - BrowseMealsViewModelCoordinatorDelegate
 
 protocol BrowseMealsViewModelCoordinatorDelegate: class {
-    
+    func userDidSelectMeal(meal: Meal)
 }
 
 // MARK: - BrowseMealsViewModelViewDelegate
@@ -26,6 +25,8 @@ protocol BrowseMealsViewModelViewDelegate: class, ErrorDelegate {
 protocol BrowseMealsViewModelType: class {
     weak var viewDelegate: BrowseMealsViewModelViewDelegate?               { get set }
     weak var coordinatorDelegate: BrowseMealsViewModelCoordinatorDelegate? { get set }
+    
+    func userDidSelectMeal(meal: Meal)
 }
 
 // MARK: - BrowseMealsViewModel
@@ -45,5 +46,9 @@ final class BrowseMealsViewModel: BrowseMealsViewModelType {
                 }
             }
         }
+    }
+    
+    func userDidSelectMeal(meal: Meal) {
+        coordinatorDelegate?.userDidSelectMeal(meal)
     }
 }

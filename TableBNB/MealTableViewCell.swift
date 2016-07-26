@@ -12,43 +12,34 @@ import UIKit
 
 final class MealTableViewCell: UITableViewCell, Configurable {
     
-    let mealNamelabel  = UILabel()
-    let mealCostLabel  = UILabel()
-    let mealFeedsLabel = UILabel()
+    let showDescriptionButton = UIButton()
     
-    let mealImageView = UIImageView()
+    let descriptionLabel = UILabel() // make this an animated popover
     
-    let spinner = UIActivityIndicatorView()
-
+    var meal: Meal?
+    
     // MARK: - MealTableViewCell Initializer
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        spinner.startAnimating()
-        MealCellStyleSheet.prepare(self)
         
+        showDescriptionButton.addTarget(self, action: #selector(showDescription), forControlEvents: .TouchUpInside)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func showDescription() {
+        descriptionLabel.hidden = false
+    }
+    
     // MARK: - Configurable Required Methods
     
     func configure(withItem item: Meal) {
         defer { setNeedsLayout() }
-        mealNamelabel.text  = item.name
-        mealCostLabel.text  = "$\(item.pricePerPerson)/Guest" // TODO: - This needs to be formatted in the viewmodel
-        mealFeedsLabel.text = "\(item.feeds) guests welcome"
-        item.loadImage { result in
-            performUpdatesOnMainThread {
-                switch result {
-                case .Failure(let error): self.mealNamelabel.text = error._domain
-                case .Success(let image): self.spinner.stopAnimating()
-                                          self.mealImageView.image = image
-                }
-            }
-        }
+        meal = item
+        MealCellStyleSheet.prepare(self)
     }
     
 }

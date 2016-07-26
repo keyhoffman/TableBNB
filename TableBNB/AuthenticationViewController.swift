@@ -12,7 +12,7 @@ import UIKit
 
 final class AuthenticationViewController: UIViewController, UITextFieldDelegate, AuthenticationViewModelViewDelegate {
     
-    // MARK: - AuthenticationViewModelProtocol Declaration
+    // MARK: - AuthenticationViewModelType Declaration
     
     weak var viewModel: AuthenticationViewModelType? {
         didSet { viewModel?.viewDelegate = self }
