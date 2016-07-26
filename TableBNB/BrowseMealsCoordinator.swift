@@ -59,11 +59,16 @@ final class BrowseMealsCoordinator: SubCoordinator, BrowseMealsViewModelCoordina
     
     // MARK: - BrowseMealsViewModelCoordinatorDelegate Required Methodes
     
-    func showDescriptionPopup(forMeal meal: Meal) {
+    func showChefDescriptionPopup(forChefID chefID: String) {
+        let descriptionPopup = PopupDialog(title: chefID, message: nil)
+        MealDescriptionStyleSheet.prepare(descriptionPopup)
+        browseMealsTableViewController.presentViewController(descriptionPopup, animated: true, completion: nil)
+    }
+    
+    func showMealDescriptionPopup(forMeal meal: Meal) {
         let descriptionPopup = PopupDialog(title: meal.name, message: meal.description)
         MealDescriptionStyleSheet.prepare(descriptionPopup)
         browseMealsTableViewController.presentViewController(descriptionPopup, animated: true, completion: nil)
-        
     }
     
     func userDidSelectMeal(meal: Meal) {

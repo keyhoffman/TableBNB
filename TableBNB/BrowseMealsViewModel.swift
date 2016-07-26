@@ -12,7 +12,8 @@ import Foundation
 
 protocol BrowseMealsViewModelCoordinatorDelegate: class {
     func userDidSelectMeal(meal: Meal)
-    func showDescriptionPopup(forMeal meal: Meal)
+    func showMealDescriptionPopup(forMeal meal: Meal)
+    func showChefDescriptionPopup(forChefID chefID: String)
 }
 
 // MARK: - BrowseMealsViewModelViewDelegate
@@ -28,7 +29,8 @@ protocol BrowseMealsViewModelType: class {
     weak var coordinatorDelegate: BrowseMealsViewModelCoordinatorDelegate? { get set }
     
     func userDidSelectMeal(meal: Meal)
-    func showDescriptionPopup(forMeal meal: Meal)
+    func showMealDescriptionPopup(forMeal meal: Meal)
+    func showChefDescriptionPopup(forChefID chefID: String)
     
 }
 
@@ -54,7 +56,11 @@ final class BrowseMealsViewModel: BrowseMealsViewModelType {
         coordinatorDelegate?.userDidSelectMeal(meal)
     }
     
-    func showDescriptionPopup(forMeal meal: Meal) {
-        coordinatorDelegate?.showDescriptionPopup(forMeal: meal)
+    func showMealDescriptionPopup(forMeal meal: Meal) {
+        coordinatorDelegate?.showMealDescriptionPopup(forMeal: meal)
+    }
+    
+    func showChefDescriptionPopup(forChefID chefID: String) {
+        coordinatorDelegate?.showChefDescriptionPopup(forChefID: chefID)
     }
 }

@@ -11,7 +11,8 @@ import UIKit
 // MARK: - MealTableViewCellDelegate Protocol
 
 protocol MealTableViewCellDelegate: class {
-    func showDescriptionPopup(forMeal meal: Meal)
+    func showMealDescriptionPopup(forMeal meal: Meal)
+    func showChefDescriptionPopup(forChefID chefID: String)
 }
 
 // MARK: - MealTableViewCell
@@ -34,20 +35,22 @@ final class MealTableViewCell: UITableViewCell, Configurable {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        showDescriptionButton.addTarget(self, action: #selector(showPopup), forControlEvents: .TouchUpInside)
+        showDescriptionButton.addTarget(self, action: #selector(showMealDescriptionPopup), forControlEvents: .TouchUpInside)
+        chefDisplayButton.addTarget(self, action: #selector(showChefDescriptionPopup), forControlEvents: .TouchUpInside)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func showDescription() {
-        descriptionLabel.hidden = false
+    func showChefDescriptionPopup() {
+        guard let chefID = meal?.chefID else { return }
+        cellDelegate?.showChefDescriptionPopup(forChefID: chefID)
     }
     
-    func showPopup() {
+    func showMealDescriptionPopup() {
         guard let meal = meal else { return }
-        cellDelegate?.showDescriptionPopup(forMeal: meal)
+        cellDelegate?.showMealDescriptionPopup(forMeal: meal)
     }
     
     // MARK: - Configurable Required Methods

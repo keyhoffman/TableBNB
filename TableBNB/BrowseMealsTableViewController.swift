@@ -36,8 +36,14 @@ final class BrowseMealsTableViewController: TableViewController<MealTableViewCel
         title = title ?? String.emptyString() + errorMessage
     }
     
-    func showDescriptionPopup(forMeal meal: Meal) {
-        viewModel?.showDescriptionPopup(forMeal: meal)
+    // MARK: - MealTableViewCellDelegate Required Methods
+    
+    func showChefDescriptionPopup(forChefID chefID: String) {
+        viewModel?.showChefDescriptionPopup(forChefID: chefID)
+    }
+    
+    func showMealDescriptionPopup(forMeal meal: Meal) {
+        viewModel?.showMealDescriptionPopup(forMeal: meal)
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
