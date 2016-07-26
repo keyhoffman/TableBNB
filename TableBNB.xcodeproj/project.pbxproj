@@ -284,6 +284,14 @@
 			name = Protocols;
 			sourceTree = "<group>";
 		};
+		034D8E081D47226A001A6499 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				0352AA711D3F020800201A1F /* AuthenticationViewController.swift */,
+			);
+			name = Authentication;
+			sourceTree = "<group>";
+		};
 		0352AA131D3EF12D00201A1F = {
 			isa = PBXGroup;
 			children = (
@@ -408,7 +416,7 @@
 		0352AA6F1D3F01C300201A1F /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				0352AA711D3F020800201A1F /* AuthenticationViewController.swift */,
+				034D8E081D47226A001A6499 /* Authentication */,
 				034D8DCB1D41822B001A6499 /* BaseTableViewController.swift */,
 				034D8DDB1D419BC7001A6499 /* BrowseMealsTableViewController.swift */,
 			);

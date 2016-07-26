@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PopupDialog
 
 // MARK: - MealTableViewCell
 
@@ -32,6 +33,10 @@ final class MealTableViewCell: UITableViewCell, Configurable {
     
     func showDescription() {
         descriptionLabel.hidden = false
+    }
+    
+    func showPopup() {
+        let popup = PopupDialog(title: meal?.name, message: meal?.description)
     }
     
     // MARK: - Configurable Required Methods
