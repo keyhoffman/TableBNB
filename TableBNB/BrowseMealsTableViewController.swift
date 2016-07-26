@@ -11,7 +11,7 @@ import UIKit
 
 // MARK: - BrowseMealsTableViewController
 
-final class BrowseMealsTableViewController: TableViewController<MealTableViewCell>, BrowseMealsViewModelViewDelegate {
+final class BrowseMealsTableViewController: TableViewController<MealTableViewCell>, BrowseMealsViewModelViewDelegate, MealTableViewCellDelegate {
     
     // MARK: - BrowseMealsViewModelType Declaration
     
@@ -34,6 +34,17 @@ final class BrowseMealsTableViewController: TableViewController<MealTableViewCel
     
     func anErrorHasOccured(errorMessage: String) {
         title = title ?? String.emptyString() + errorMessage
+    }
+    
+    func showDescriptionPopup(forMeal meal: Meal) {
+        viewModel?.showDescriptionPopup(forMeal: meal)
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("MealTableViewCell", forIndexPath: indexPath) as! MealTableViewCell
+        cell.cellDelegate = self
+        cell.configure(withItem: data[indexPath.row])
+        return cell
     }
     
     // MARK: - Optional TableViewDelegate Methods

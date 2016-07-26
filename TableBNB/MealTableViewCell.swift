@@ -7,24 +7,30 @@
 //
 
 import UIKit
-import PopupDialog
+
+protocol MealTableViewCellDelegate: class {
+    func showDescriptionPopup(forMeal meal: Meal)
+}
 
 // MARK: - MealTableViewCell
 
 final class MealTableViewCell: UITableViewCell, Configurable {
     
     let showDescriptionButton = UIButton()
+    let chefDisplayButton     = UIButton()
     
     let descriptionLabel = UILabel() // make this an animated popover
     
     var meal: Meal?
+    
+    weak var cellDelegate: MealTableViewCellDelegate?
     
     // MARK: - MealTableViewCell Initializer
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        showDescriptionButton.addTarget(self, action: #selector(showDescription), forControlEvents: .TouchUpInside)
+        showDescriptionButton.addTarget(self, action: #selector(showPopup), forControlEvents: .TouchUpInside)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -36,7 +42,8 @@ final class MealTableViewCell: UITableViewCell, Configurable {
     }
     
     func showPopup() {
-        let popup = PopupDialog(title: meal?.name, message: meal?.description)
+        guard let meal = meal else { return }
+        cellDelegate?.showDescriptionPopup(forMeal: meal)
     }
     
     // MARK: - Configurable Required Methods

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import PopupDialog
 
 // MARK: - BrowseMealsCoordinatorDelegate Protocol
 
@@ -48,8 +49,6 @@ final class BrowseMealsCoordinator: SubCoordinator, BrowseMealsViewModelCoordina
         
         browseMealsTableViewController.viewModel = browseMealsViewModel
         browseMealsViewModel.coordinatorDelegate = self
-        
-        
     }
     
     // MARK: - SubCoordinator Required Methods
@@ -59,6 +58,13 @@ final class BrowseMealsCoordinator: SubCoordinator, BrowseMealsViewModelCoordina
     }
     
     // MARK: - BrowseMealsViewModelCoordinatorDelegate Required Methodes
+    
+    func showDescriptionPopup(forMeal meal: Meal) {
+        let descriptionPopup = PopupDialog(title: meal.name, message: meal.description)
+        MealDescriptionStyleSheet.prepare(descriptionPopup)
+        browseMealsTableViewController.presentViewController(descriptionPopup, animated: true, completion: nil)
+        
+    }
     
     func userDidSelectMeal(meal: Meal) {
         meal.dump_(withContext: "userDidSelectMeal")

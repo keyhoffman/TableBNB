@@ -12,6 +12,7 @@ import Foundation
 
 protocol BrowseMealsViewModelCoordinatorDelegate: class {
     func userDidSelectMeal(meal: Meal)
+    func showDescriptionPopup(forMeal meal: Meal)
 }
 
 // MARK: - BrowseMealsViewModelViewDelegate
@@ -27,6 +28,8 @@ protocol BrowseMealsViewModelType: class {
     weak var coordinatorDelegate: BrowseMealsViewModelCoordinatorDelegate? { get set }
     
     func userDidSelectMeal(meal: Meal)
+    func showDescriptionPopup(forMeal meal: Meal)
+    
 }
 
 // MARK: - BrowseMealsViewModel
@@ -35,7 +38,6 @@ final class BrowseMealsViewModel: BrowseMealsViewModelType {
 
     weak var coordinatorDelegate: BrowseMealsViewModelCoordinatorDelegate?
     weak var viewDelegate: BrowseMealsViewModelViewDelegate? { didSet { beginLoading() } }
-    
     
     private func beginLoading() {
         Meal.loadChildAdded { result in
@@ -50,5 +52,9 @@ final class BrowseMealsViewModel: BrowseMealsViewModelType {
     
     func userDidSelectMeal(meal: Meal) {
         coordinatorDelegate?.userDidSelectMeal(meal)
+    }
+    
+    func showDescriptionPopup(forMeal meal: Meal) {
+        coordinatorDelegate?.showDescriptionPopup(forMeal: meal)
     }
 }
