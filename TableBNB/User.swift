@@ -14,6 +14,7 @@ struct User: FBSendable {
     let key:        String
     let username:   String
     let email:      String
+    let rating:     Double?
 }
 
 // MARK: - User Extension
@@ -30,10 +31,10 @@ extension User {
 extension User {
     static func Create(FBDict: FBDictionary?) -> Result<User> {
         guard let FBDict = FBDict else { return .Failure(instantiationError) }
-        guard let email = FBDict["email"] as? String, let username = FBDict["username"] as? String, let key = FBDict["key"] as? String else {
-            return .Failure(instantiationError)
-        }
-        return .Success(User(key: key, username: username, email: email))
+        guard let email = FBDict["email"] as? String, let username = FBDict["username"] as? String, let key = FBDict["key"] as? String,
+            let rating = FBDict["rating"] as? Double else { return .Failure(instantiationError) }
+        
+        return .Success(User(key: key, username: username, email: email, rating: rating))
     }
 }
 

@@ -8,6 +8,8 @@
 
 import UIKit
 
+// MARK: - MealTableViewCellDelegate Protocol
+
 protocol MealTableViewCellDelegate: class {
     func showDescriptionPopup(forMeal meal: Meal)
 }
@@ -18,6 +20,8 @@ final class MealTableViewCell: UITableViewCell, Configurable {
     
     let showDescriptionButton = UIButton()
     let chefDisplayButton     = UIButton()
+    
+    // TODO: Add viewmodel to cell
     
     let descriptionLabel = UILabel() // make this an animated popover
     
