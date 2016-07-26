@@ -7,7 +7,13 @@
 //
 
 import Foundation
-import UIKit
+
+// TODO: Keep this handy
+
+//protocol Mappable {
+//    associatedtype Element
+//    func map<OutType>(transform: Element -> OutType) -> Self
+//}
 
 enum Result<T> {
     typealias Value = T

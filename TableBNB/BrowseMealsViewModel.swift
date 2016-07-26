@@ -7,30 +7,32 @@
 //
 
 import Foundation
+import UIKit
 
 // MARK: - BrowseMealsViewModelCoordinatorDelegate
 
 protocol BrowseMealsViewModelCoordinatorDelegate: class {
     func userDidSelectMeal(meal: Meal)
     func showMealDescriptionPopup(forMeal meal: Meal)
-    func showChefDescriptionPopup(forChefID chefID: String)
+    func showChefDescriptionPopup(forUser user: User)
 }
 
 // MARK: - BrowseMealsViewModelViewDelegate
 
 protocol BrowseMealsViewModelViewDelegate: class, ErrorDelegate {
     func appendMeal(meal: Meal)
+    func appendMealImage(image: UIImage)
 }
 
 // MARK: - BrowvarealsViewModelProtocol
 
 protocol BrowseMealsViewModelType: class {
-    weak var viewDelegate: BrowseMealsViewModelViewDelegate?               { get set }
+    weak var viewDelegate:        BrowseMealsViewModelViewDelegate?        { get set }
     weak var coordinatorDelegate: BrowseMealsViewModelCoordinatorDelegate? { get set }
     
     func userDidSelectMeal(meal: Meal)
     func showMealDescriptionPopup(forMeal meal: Meal)
-    func showChefDescriptionPopup(forChefID chefID: String)
+    func showChefDescriptionPopup(forMeal meal: Meal)
     
 }
 
@@ -41,17 +43,6 @@ final class BrowseMealsViewModel: BrowseMealsViewModelType {
     weak var coordinatorDelegate: BrowseMealsViewModelCoordinatorDelegate?
     weak var viewDelegate: BrowseMealsViewModelViewDelegate? { didSet { beginLoading() } }
     
-    private func beginLoading() {
-        Meal.loadChildAdded { result in
-            performUpdatesOnMainThread {
-                switch result {
-                case .Failure(let error): self.viewDelegate?.anErrorHasOccured(error._domain) // TODO: fix error handling
-                case .Success(let meal):  self.viewDelegate?.appendMeal(meal)
-                }
-            }
-        }
-    }
-    
     func userDidSelectMeal(meal: Meal) {
         coordinatorDelegate?.userDidSelectMeal(meal)
     }
@@ -60,7 +51,41 @@ final class BrowseMealsViewModel: BrowseMealsViewModelType {
         coordinatorDelegate?.showMealDescriptionPopup(forMeal: meal)
     }
     
-    func showChefDescriptionPopup(forChefID chefID: String) {
-        coordinatorDelegate?.showChefDescriptionPopup(forChefID: chefID)
+    func showChefDescriptionPopup(forMeal meal: Meal) {
+        Meal.loadValue(withKey: meal.chefID, forType: User.self) { result in
+            performUpdatesOnMainThread {
+                switch result {
+                case .Failure(let error): self.viewDelegate?.anErrorHasOccured(error._domain) // TODO: fix error handling
+                case .Success(let user):  self.coordinatorDelegate?.showChefDescriptionPopup(forUser: user)
+                }
+            }
+        }
     }
+    
+    private func beginLoading() {
+        Meal.loadChildAdded { result in
+            switch result {
+            case .Failure(let error): self.viewDelegate?.anErrorHasOccured(error._domain) // TODO: fix error handling
+            case .Success(let meal):  self.loadImage(forMeal: meal)
+            }
+        }
+    }
+    
+    private func loadImage(forMeal meal: Meal) {
+        meal.loadImage { result in
+            performUpdatesOnMainThread {
+                switch result {
+                case .Failure(let error): self.viewDelegate?.anErrorHasOccured(error._domain) // TODO: fix error handling
+                case .Success(let image): self.viewDelegate?.appendMeal(meal)
+                                          self.viewDelegate?.appendMealImage(image)
+                }
+            }
+        }
+    }
+
 }
+
+
+
+
+

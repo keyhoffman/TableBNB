@@ -19,6 +19,7 @@ struct Meal: FBSendable, FBStorageType {
     let storagePath:    String
     let description:    String
     let chefID:         String
+    let ingredients:    String
 }
 
 // MARK: - Meal Extension
@@ -26,7 +27,7 @@ struct Meal: FBSendable, FBStorageType {
 extension Meal {
     static let Path         = "meals/"
     static let NeedsAutoKey = false
-    static let FBSubKeys    = ["name", "pricePerPerson", "feeds"]
+    static let FBSubKeys    = ["name", "pricePerPerson", "feeds", "storagePath", "description", "chefID"]
 }
 
 // MARK: - Meal "createNew" Initializer Extension
@@ -37,9 +38,9 @@ extension Meal {
         guard let FBDict = FBDict else { return .Failure(instantiationError) }
         guard let key = FBDict["key"] as? String, let name = FBDict["name"] as? String, let pricePerPerson = FBDict["pricePerPerson"] as? Double,
             let feeds = FBDict["feeds"] as? Int, let storagePath = FBDict["storagePath"] as? String, let description = FBDict["description"] as? String,
-            let chefID = FBDict["chefID"] as? String else { return .Failure(instantiationError) }
+            let chefID = FBDict["chefID"] as? String, let ingredients = FBDict["ingredients"] as? String else { return .Failure(instantiationError) }
         
-        return .Success(Meal(key: key, name: name, pricePerPerson: pricePerPerson, feeds: feeds, storagePath: storagePath, description: description, chefID: chefID))
+        return .Success(Meal(key: key, name: name, pricePerPerson: pricePerPerson, feeds: feeds, storagePath: storagePath, description: description, chefID: chefID, ingredients: ingredients))
     }
 }
 

@@ -14,7 +14,7 @@ struct User: FBSendable {
     let key:        String
     let username:   String
     let email:      String
-    let rating:     Double?
+    let rating:     Double
 }
 
 // MARK: - User Extension
@@ -22,7 +22,8 @@ struct User: FBSendable {
 extension User {
     static let Path         = "users/"
     static let NeedsAutoKey = false
-    static let FBSubKeys    = ["username", "email"]
+    static let FBSubKeys    = ["username", "email", "rating"]
+    static let MaxRating    = 5
 }
 
 // MARK: - User "createNew" Initializer Extension
@@ -41,5 +42,5 @@ extension User {
 // MARK: - User Equatability
 
 func == (lhs: User, rhs: User) -> Bool {
-    return lhs.key == rhs.key && lhs.username == rhs.username && lhs.email == rhs.email
+    return lhs.key == rhs.key && lhs.username == rhs.username && lhs.email == rhs.email && lhs.rating == rhs.rating
 }

@@ -12,7 +12,7 @@ import UIKit
 
 protocol MealTableViewCellDelegate: class {
     func showMealDescriptionPopup(forMeal meal: Meal)
-    func showChefDescriptionPopup(forChefID chefID: String)
+    func showChefDescriptionPopup(forMeal meal: Meal)
 }
 
 // MARK: - MealTableViewCell
@@ -20,11 +20,11 @@ protocol MealTableViewCellDelegate: class {
 final class MealTableViewCell: UITableViewCell, Configurable {
     
     let showDescriptionButton = UIButton()
-    let chefDisplayButton     = UIButton()
+    let displayChefInfoButton = UIButton()
     
-    // TODO: Add viewmodel to cell
+    let spinner = UIActivityIndicatorView()
     
-    let descriptionLabel = UILabel() // make this an animated popover
+    let mealImageView = UIImageView()
     
     var meal: Meal?
     
@@ -35,8 +35,10 @@ final class MealTableViewCell: UITableViewCell, Configurable {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        spinner.startAnimating()
+        
         showDescriptionButton.addTarget(self, action: #selector(showMealDescriptionPopup), forControlEvents: .TouchUpInside)
-        chefDisplayButton.addTarget(self, action: #selector(showChefDescriptionPopup), forControlEvents: .TouchUpInside)
+        displayChefInfoButton.addTarget(self, action: #selector(showChefDescriptionPopup), forControlEvents: .TouchUpInside)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -44,8 +46,8 @@ final class MealTableViewCell: UITableViewCell, Configurable {
     }
     
     func showChefDescriptionPopup() {
-        guard let chefID = meal?.chefID else { return }
-        cellDelegate?.showChefDescriptionPopup(forChefID: chefID)
+        guard let meal = meal else { return }
+        cellDelegate?.showChefDescriptionPopup(forMeal: meal)
     }
     
     func showMealDescriptionPopup() {
@@ -58,6 +60,7 @@ final class MealTableViewCell: UITableViewCell, Configurable {
     func configure(withItem item: Meal) {
         defer { setNeedsLayout() }
         meal = item
+        spinner.stopAnimating()
         MealCellStyleSheet.prepare(self)
     }
     

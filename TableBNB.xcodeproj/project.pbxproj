@@ -52,24 +52,24 @@
 		034D8DF21D41D18D001A6499 /* FBStorageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DF11D41D18D001A6499 /* FBStorageType.swift */; };
 		034D8DF31D41D18D001A6499 /* FBStorageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DF11D41D18D001A6499 /* FBStorageType.swift */; };
 		034D8DF41D41D18D001A6499 /* FBStorageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DF11D41D18D001A6499 /* FBStorageType.swift */; };
-		034D8DF61D41F6A3001A6499 /* MealTableViewCellStyleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DF51D41F6A3001A6499 /* MealTableViewCellStyleSheet.swift */; };
-		034D8DF71D41F6A3001A6499 /* MealTableViewCellStyleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DF51D41F6A3001A6499 /* MealTableViewCellStyleSheet.swift */; };
-		034D8DF81D41F6A3001A6499 /* MealTableViewCellStyleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DF51D41F6A3001A6499 /* MealTableViewCellStyleSheet.swift */; };
+		034D8DF61D41F6A3001A6499 /* MealCellStyleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DF51D41F6A3001A6499 /* MealCellStyleSheet.swift */; };
+		034D8DF71D41F6A3001A6499 /* MealCellStyleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DF51D41F6A3001A6499 /* MealCellStyleSheet.swift */; };
+		034D8DF81D41F6A3001A6499 /* MealCellStyleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DF51D41F6A3001A6499 /* MealCellStyleSheet.swift */; };
 		034D8DFB1D41F964001A6499 /* ViewPreparer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DFA1D41F964001A6499 /* ViewPreparer.swift */; };
 		034D8DFC1D41F964001A6499 /* ViewPreparer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DFA1D41F964001A6499 /* ViewPreparer.swift */; };
 		034D8DFD1D41F964001A6499 /* ViewPreparer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8DFA1D41F964001A6499 /* ViewPreparer.swift */; };
 		034D8E011D46BC16001A6499 /* ErrorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8E001D46BC16001A6499 /* ErrorDelegate.swift */; };
 		034D8E021D46BC16001A6499 /* ErrorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8E001D46BC16001A6499 /* ErrorDelegate.swift */; };
 		034D8E031D46BC16001A6499 /* ErrorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8E001D46BC16001A6499 /* ErrorDelegate.swift */; };
-		034D8E0C1D472E08001A6499 /* MealDescriptionPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8E0B1D472E08001A6499 /* MealDescriptionPopupViewController.swift */; };
-		034D8E0D1D472E08001A6499 /* MealDescriptionPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8E0B1D472E08001A6499 /* MealDescriptionPopupViewController.swift */; };
-		034D8E0E1D472E08001A6499 /* MealDescriptionPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8E0B1D472E08001A6499 /* MealDescriptionPopupViewController.swift */; };
 		034D8E101D474012001A6499 /* MealDescriptionStyleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8E0F1D474012001A6499 /* MealDescriptionStyleSheet.swift */; };
 		034D8E111D474012001A6499 /* MealDescriptionStyleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8E0F1D474012001A6499 /* MealDescriptionStyleSheet.swift */; };
 		034D8E121D474012001A6499 /* MealDescriptionStyleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8E0F1D474012001A6499 /* MealDescriptionStyleSheet.swift */; };
 		034D8E141D474937001A6499 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8E131D474937001A6499 /* Color.swift */; };
 		034D8E151D474937001A6499 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8E131D474937001A6499 /* Color.swift */; };
 		034D8E161D474937001A6499 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8E131D474937001A6499 /* Color.swift */; };
+		034D8E181D47CD84001A6499 /* ChefInformationStyleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8E171D47CD84001A6499 /* ChefInformationStyleSheet.swift */; };
+		034D8E191D47CD84001A6499 /* ChefInformationStyleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8E171D47CD84001A6499 /* ChefInformationStyleSheet.swift */; };
+		034D8E1A1D47CD84001A6499 /* ChefInformationStyleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D8E171D47CD84001A6499 /* ChefInformationStyleSheet.swift */; };
 		0352AA201D3EF12D00201A1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0352AA1F1D3EF12D00201A1F /* AppDelegate.swift */; };
 		0352AA281D3EF12D00201A1F /* TableBNB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0352AA261D3EF12D00201A1F /* TableBNB.xcdatamodeld */; };
 		0352AA2A1D3EF12D00201A1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0352AA291D3EF12D00201A1F /* Assets.xcassets */; };
@@ -162,12 +162,12 @@
 		034D8DDF1D419C9A001A6499 /* BrowseMealsTableViewControllerStyleSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseMealsTableViewControllerStyleSheet.swift; sourceTree = "<group>"; };
 		034D8DE31D41A295001A6499 /* BrowseMealsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseMealsViewModel.swift; sourceTree = "<group>"; };
 		034D8DF11D41D18D001A6499 /* FBStorageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBStorageType.swift; sourceTree = "<group>"; };
-		034D8DF51D41F6A3001A6499 /* MealTableViewCellStyleSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealTableViewCellStyleSheet.swift; sourceTree = "<group>"; };
+		034D8DF51D41F6A3001A6499 /* MealCellStyleSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealCellStyleSheet.swift; sourceTree = "<group>"; };
 		034D8DFA1D41F964001A6499 /* ViewPreparer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPreparer.swift; sourceTree = "<group>"; };
 		034D8E001D46BC16001A6499 /* ErrorDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorDelegate.swift; sourceTree = "<group>"; };
-		034D8E0B1D472E08001A6499 /* MealDescriptionPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealDescriptionPopupViewController.swift; sourceTree = "<group>"; };
 		034D8E0F1D474012001A6499 /* MealDescriptionStyleSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealDescriptionStyleSheet.swift; sourceTree = "<group>"; };
 		034D8E131D474937001A6499 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		034D8E171D47CD84001A6499 /* ChefInformationStyleSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChefInformationStyleSheet.swift; sourceTree = "<group>"; };
 		0352AA1C1D3EF12D00201A1F /* TableBNB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableBNB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0352AA1F1D3EF12D00201A1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0352AA271D3EF12D00201A1F /* TableBNB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TableBNB.xcdatamodel; sourceTree = "<group>"; };
@@ -280,8 +280,8 @@
 		034D8DBA1D416C7F001A6499 /* SubCoordinators */ = {
 			isa = PBXGroup;
 			children = (
-				034D8DBB1D416DF3001A6499 /* BrowseMealsCoordinator.swift */,
 				034D8DBF1D416E08001A6499 /* AddMealCoordinator.swift */,
+				034D8DBB1D416DF3001A6499 /* BrowseMealsCoordinator.swift */,
 				034D8DC31D416E1E001A6499 /* UserProfileCoordinator.swift */,
 			);
 			name = SubCoordinators;
@@ -418,8 +418,9 @@
 				0352AA751D3F02EA00201A1F /* AuthViewControllerStyleSheet.swift */,
 				034D8DC71D4171F4001A6499 /* TabBarStyleSheet.swift */,
 				034D8DDF1D419C9A001A6499 /* BrowseMealsTableViewControllerStyleSheet.swift */,
-				034D8DF51D41F6A3001A6499 /* MealTableViewCellStyleSheet.swift */,
+				034D8DF51D41F6A3001A6499 /* MealCellStyleSheet.swift */,
 				034D8E0F1D474012001A6499 /* MealDescriptionStyleSheet.swift */,
+				034D8E171D47CD84001A6499 /* ChefInformationStyleSheet.swift */,
 			);
 			name = StyleSheets;
 			sourceTree = "<group>";
@@ -448,7 +449,6 @@
 				034D8E0A1D472D92001A6499 /* BaseTableViewController */,
 				034D8E081D47226A001A6499 /* Authentication */,
 				034D8DDB1D419BC7001A6499 /* BrowseMealsTableViewController.swift */,
-				034D8E0B1D472E08001A6499 /* MealDescriptionPopupViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -823,6 +823,7 @@
 				034D8DCC1D41822B001A6499 /* BaseTableViewController.swift in Sources */,
 				034D8DAA1D415DA8001A6499 /* String.swift in Sources */,
 				0352AA9E1D40466E00201A1F /* GCDBlackBox.swift in Sources */,
+				034D8E181D47CD84001A6499 /* ChefInformationStyleSheet.swift in Sources */,
 				0352AA601D3EF4F900201A1F /* ApplicationCoordinator.swift in Sources */,
 				034D8DFB1D41F964001A6499 /* ViewPreparer.swift in Sources */,
 				0352AAA71D40A63C00201A1F /* Dictionary.swift in Sources */,
@@ -830,9 +831,8 @@
 				034D8DB31D4164A0001A6499 /* TabBarCoordinator.swift in Sources */,
 				034D8E101D474012001A6499 /* MealDescriptionStyleSheet.swift in Sources */,
 				034D8DDC1D419BC7001A6499 /* BrowseMealsTableViewController.swift in Sources */,
-				034D8E0C1D472E08001A6499 /* MealDescriptionPopupViewController.swift in Sources */,
 				0352AA861D3F111300201A1F /* Result.swift in Sources */,
-				034D8DF61D41F6A3001A6499 /* MealTableViewCellStyleSheet.swift in Sources */,
+				034D8DF61D41F6A3001A6499 /* MealCellStyleSheet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -846,13 +846,12 @@
 				0352AA771D3F02EA00201A1F /* AuthViewControllerStyleSheet.swift in Sources */,
 				034D8DBD1D416DF3001A6499 /* BrowseMealsCoordinator.swift in Sources */,
 				034D8DE51D41A295001A6499 /* BrowseMealsViewModel.swift in Sources */,
-				034D8DF71D41F6A3001A6499 /* MealTableViewCellStyleSheet.swift in Sources */,
+				034D8DF71D41F6A3001A6499 /* MealCellStyleSheet.swift in Sources */,
 				0352AA5D1D3EF48300201A1F /* Coordinator.swift in Sources */,
 				0352AAA31D40A5ED00201A1F /* TextField.swift in Sources */,
 				034D8E021D46BC16001A6499 /* ErrorDelegate.swift in Sources */,
 				034D8E151D474937001A6499 /* Color.swift in Sources */,
 				0352AA691D3EF79800201A1F /* AuthenticationCoordinator.swift in Sources */,
-				034D8E0D1D472E08001A6499 /* MealDescriptionPopupViewController.swift in Sources */,
 				0352AA7B1D3F030500201A1F /* General.swift in Sources */,
 				034D8DFC1D41F964001A6499 /* ViewPreparer.swift in Sources */,
 				0352AA6D1D3EF85E00201A1F /* User.swift in Sources */,
@@ -876,6 +875,7 @@
 				034D8DAB1D415DA8001A6499 /* String.swift in Sources */,
 				0352AA651D3EF6D200201A1F /* Dumpable.swift in Sources */,
 				0352AA9F1D40466E00201A1F /* GCDBlackBox.swift in Sources */,
+				034D8E191D47CD84001A6499 /* ChefInformationStyleSheet.swift in Sources */,
 				034D8E111D474012001A6499 /* MealDescriptionStyleSheet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -890,13 +890,12 @@
 				0352AA781D3F02EA00201A1F /* AuthViewControllerStyleSheet.swift in Sources */,
 				034D8DBE1D416DF3001A6499 /* BrowseMealsCoordinator.swift in Sources */,
 				034D8DE61D41A295001A6499 /* BrowseMealsViewModel.swift in Sources */,
-				034D8DF81D41F6A3001A6499 /* MealTableViewCellStyleSheet.swift in Sources */,
+				034D8DF81D41F6A3001A6499 /* MealCellStyleSheet.swift in Sources */,
 				0352AA5E1D3EF48300201A1F /* Coordinator.swift in Sources */,
 				0352AAA41D40A5ED00201A1F /* TextField.swift in Sources */,
 				034D8E031D46BC16001A6499 /* ErrorDelegate.swift in Sources */,
 				034D8E161D474937001A6499 /* Color.swift in Sources */,
 				0352AA6A1D3EF79800201A1F /* AuthenticationCoordinator.swift in Sources */,
-				034D8E0E1D472E08001A6499 /* MealDescriptionPopupViewController.swift in Sources */,
 				0352AA7C1D3F030500201A1F /* General.swift in Sources */,
 				034D8DFD1D41F964001A6499 /* ViewPreparer.swift in Sources */,
 				0352AA6E1D3EF85E00201A1F /* User.swift in Sources */,
@@ -920,6 +919,7 @@
 				034D8DAC1D415DA8001A6499 /* String.swift in Sources */,
 				0352AA661D3EF6D200201A1F /* Dumpable.swift in Sources */,
 				0352AAA01D40466E00201A1F /* GCDBlackBox.swift in Sources */,
+				034D8E1A1D47CD84001A6499 /* ChefInformationStyleSheet.swift in Sources */,
 				034D8E121D474012001A6499 /* MealDescriptionStyleSheet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

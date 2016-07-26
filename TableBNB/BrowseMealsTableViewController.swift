@@ -13,6 +13,8 @@ import UIKit
 
 final class BrowseMealsTableViewController: TableViewController<MealTableViewCell>, BrowseMealsViewModelViewDelegate, MealTableViewCellDelegate {
     
+    private var mealImages: [UIImage?] = []
+    
     // MARK: - BrowseMealsViewModelType Declaration
     
     weak var viewModel: BrowseMealsViewModelType? {
@@ -32,14 +34,18 @@ final class BrowseMealsTableViewController: TableViewController<MealTableViewCel
         self.data.append(meal)
     }
     
+    func appendMealImage(image: UIImage) {
+        mealImages.append(image)
+    }
+    
     func anErrorHasOccured(errorMessage: String) {
         title = title ?? String.emptyString() + errorMessage
     }
     
     // MARK: - MealTableViewCellDelegate Required Methods
     
-    func showChefDescriptionPopup(forChefID chefID: String) {
-        viewModel?.showChefDescriptionPopup(forChefID: chefID)
+    func showChefDescriptionPopup(forMeal meal: Meal) {
+        viewModel?.showChefDescriptionPopup(forMeal: meal)
     }
     
     func showMealDescriptionPopup(forMeal meal: Meal) {
@@ -50,6 +56,7 @@ final class BrowseMealsTableViewController: TableViewController<MealTableViewCel
         let cell = tableView.dequeueReusableCellWithIdentifier("MealTableViewCell", forIndexPath: indexPath) as! MealTableViewCell
         cell.cellDelegate = self
         cell.configure(withItem: data[indexPath.row])
+        cell.mealImageView.image = mealImages[indexPath.row]
         return cell
     }
     

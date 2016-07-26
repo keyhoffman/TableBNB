@@ -27,7 +27,7 @@ extension AuthenticationChecker {
     func checkCurrentUser() -> User? {
         let auth = FIRAuth.auth()
         guard let key = auth?.currentUser?.uid, email = auth?.currentUser?.email, username = auth?.currentUser?.displayName  else { return nil }
-        return User(key: key, username: username, email: email)
+        return User(key: key, username: username, email: email, rating: 0)
     }
 }
 

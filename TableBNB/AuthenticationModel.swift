@@ -37,7 +37,7 @@ final class AuthenticationModel: AuthenticationModelType {
                 withResult(.Failure(error))
                 return
             }
-            let loggedInUser = User(key: user.uid, username: username, email: email)
+            let loggedInUser = User(key: user.uid, username: username, email: email, rating: 0)
             withResult(.Success(loggedInUser))
             return
         }
@@ -64,7 +64,7 @@ final class AuthenticationModel: AuthenticationModelType {
                     withResult(.Failure(error))
                     return
                 }
-                let logggedInUser = User(key: user.uid, username: username, email: email)
+                let logggedInUser = User(key: user.uid, username: username, email: email, rating: 0)
                 logggedInUser.sendToFB { result in
                     withResult(result)
                     return
